@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" style="-fx-background-color: whitesmoke;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="140.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="60.0" />
+        <ColumnConstraints />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints />
+    </rowConstraints>
+    <children>
+        <GridPane GridPane.columnIndex="1">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="34.0" prefWidth="200.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <GridPane GridPane.rowIndex="2">
+                    <columnConstraints>
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="62.0" minHeight="34.0" prefHeight="34.0" vgrow="NEVER" />
+                        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="93.0" valignment="CENTER" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-alignment: center; -fx-background-color: lightgreen;">
+                            <children>
+                                <Label text="N Ő" textFill="WHITE">
+                                    <font>
+                                        <Font size="20.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </HBox>
+                        <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="200.0" style="-fx-alignment: center;" GridPane.rowIndex="1">
+                            <children>
+                                <ImageView fitHeight="161.0" fitWidth="318.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="file:/D:/Mappák/uni/Szoftverfejlesztés/JavaFX1/resources/female.png" />
+                                    </image>
+                                </ImageView>
+                            </children>
+                        </HBox>
+                    </children>
+                </GridPane>
+                <GridPane layoutX="10.0" layoutY="277.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="62.0" minHeight="34.0" prefHeight="34.0" vgrow="NEVER" />
+                        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="93.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-alignment: center; -fx-background-color: lightgreen;">
+                            <children>
+                                <Label text="BMI" textFill="WHITE">
+                                    <font>
+                                        <Font size="20.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </HBox>
+                        <GridPane GridPane.rowIndex="1">
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="79.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="71.0" vgrow="SOMETIMES" />
+                            </rowConstraints>
+                            <children>
+                                <GridPane prefWidth="360.0">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+
+                                    </rowConstraints>
+                                    <children>
+                                        <HBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" style="-fx-alignment: center_left;">
+                                            <children>
+                                                <Label prefHeight="27.0" prefWidth="73.0" style="-fx-font-weight: bold;" text="Súly(kg):">
+                                                    <font>
+                                                        <Font size="15.0" />
+                                                    </font>
+                                                </Label>
+                                                <TextField prefHeight="25.0" prefWidth="45.0" />
+                                            </children>
+                                            <padding>
+                                                <Insets left="20.0" />
+                                            </padding>
+                                        </HBox>
+                                        <HBox layoutX="10.0" layoutY="54.0" prefHeight="100.0" prefWidth="200.0" style="-fx-alignment: center_left;" GridPane.columnIndex="1">
+                                            <children>
+                                                <Label prefHeight="27.0" prefWidth="110.0" style="-fx-font-weight: bold;" text="Magasság(cm):">
+                                                    <font>
+                                                        <Font size="15.0" />
+                                                    </font>
+                                                </Label>
+                                                <TextField prefHeight="25.0" prefWidth="45.0" />
+                                            </children>
+                                            <padding>
+                                                <Insets left="20.0" />
+                                            </padding>
+                                        </HBox>
+                                    </children>
+                                </GridPane>
+                                <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-alignment: Center;" GridPane.rowIndex="1">
+                                    <children>
+                                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" style="-fx-background-color: lightgreen; -fx-font-weight: bold;" text="SZÁMOLJ!" />
+                                        <Label prefHeight="32.0" prefWidth="138.0" style="-fx-font-weight: bold;" text="BMI érték:">
+                                            <padding>
+                                                <Insets left="10.0" />
+                                            </padding>
+                                            <font>
+                                                <Font size="22.0" />
+                                            </font>
+                                        </Label>
+                                        <Label alignment="CENTER_RIGHT" layoutX="132.0" layoutY="21.0" prefHeight="32.0" prefWidth="42.0" style="-fx-font-weight: bold;" text="0">
+                                            <font>
+                                                <Font size="22.0" />
+                                            </font>
+                                            <padding>
+                                                <Insets right="15.0" />
+                                            </padding>
+                                        </Label>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </GridPane>
+                    </children>
+                </GridPane>
+                <GridPane layoutX="10.0" layoutY="277.0" style="-fx-alignment: center;" GridPane.rowIndex="1">
+                    <columnConstraints>
+                        <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="62.0" minHeight="34.0" prefHeight="34.0" vgrow="NEVER" />
+                        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="93.0" valignment="CENTER" vgrow="ALWAYS" />
+                    </rowConstraints>
+                    <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-alignment: center; -fx-background-color: lightgreen;">
+                            <children>
+                                <Label text="F É R F I" textFill="WHITE">
+                                    <font>
+                                        <Font size="20.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </HBox>
+                        <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="200.0" style="-fx-alignment: center;" GridPane.rowIndex="1">
+                            <children>
+                                <ImageView fitHeight="161.0" fitWidth="318.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="file:/D:/Mappák/uni/Szoftverfejlesztés/JavaFX1/resources/male.png" />
+                                    </image>
+                                </ImageView>
+                            </children>
+                        </HBox>
+                    </children>
+                </GridPane>
+            </children>
+        </GridPane>
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="194.0" minHeight="34.0" prefHeight="34.0" vgrow="NEVER" />
+                <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <HBox maxHeight="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0" style="-fx-alignment: center; -fx-background-color: lightgreen;">
+                    <children>
+                        <Label text="KALÓRIA KALKULÁTOR" textFill="WHITE">
+                            <font>
+                                <Font size="20.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+                <GridPane GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                            <padding>
+                                <Insets left="15.0" />
+                            </padding>
+                            <children>
+                                <Label prefWidth="200.0" text="Elfogyasztott étel: ">
+                                    <font>
+                                        <Font size="24.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                            <padding>
+                                <Insets left="15.0" />
+                            </padding>
+                            <children>
+                                <Label prefHeight="35.0" prefWidth="200.0" text="Mennyiség(g):">
+                                    <font>
+                                        <Font size="24.0" />
+                                    </font>
+                                </Label>
+                                <TextField prefHeight="25.0" prefWidth="72.0" />
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="84.0" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+                            <padding>
+                                <Insets left="15.0" />
+                            </padding>
+                            <children>
+                                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: lightgreen; -fx-font-weight: bold;" text="HOZZÁADÁS" />
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="158.0" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
+                            <padding>
+                                <Insets left="15.0" />
+                            </padding>
+                            <children>
+                                <Label prefHeight="35.0" prefWidth="252.0" text="Összes bevitt kalória:">
+                                    <font>
+                                        <Font size="24.0" />
+                                    </font>
+                                </Label>
+                                <Label text="0 kcal">
+                                    <font>
+                                        <Font size="24.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="232.0" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
+                            <padding>
+                                <Insets left="15.0" />
+                            </padding>
+                            <children>
+                                <Label prefHeight="35.0" prefWidth="252.0" text="Fehérje:">
+                                    <font>
+                                        <Font size="24.0" />
+                                    </font>
+                                </Label>
+                                <Label text="0 g">
+                                    <font>
+                                        <Font size="24.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="306.0" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
+                            <padding>
+                                <Insets left="15.0" />
+                            </padding>
+                            <children>
+                                <Label prefHeight="35.0" prefWidth="252.0" text="Zsír:">
+                                    <font>
+                                        <Font size="24.0" />
+                                    </font>
+                                </Label>
+                                <Label text="0 g">
+                                    <font>
+                                        <Font size="24.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="380.0" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6">
+                            <padding>
+                                <Insets left="15.0" />
+                            </padding>
+                            <children>
+                                <Label prefHeight="35.0" prefWidth="252.0" text="Szénhidrát:">
+                                    <font>
+                                        <Font size="24.0" />
+                                    </font>
+                                </Label>
+                                <Label text="0 g">
+                                    <font>
+                                        <Font size="24.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </HBox>
+                    </children>
+                </GridPane>
+            </children>
+        </GridPane>
+    </children>
+</GridPane>
