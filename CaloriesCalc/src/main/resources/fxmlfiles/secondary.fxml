@@ -48,9 +48,9 @@
                         <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="200.0" style="-fx-alignment: center;" GridPane.rowIndex="1">
                             <children>
                                 <ImageView fitHeight="161.0" fitWidth="318.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="file:/D:/Mappák/uni/Szoftverfejlesztés/JavaFX1/resources/female.png" />
-                                    </image>
+                           <image>
+                              <Image url="@../images/female.png" />
+                           </image>
                                 </ImageView>
                             </children>
                         </HBox>
@@ -168,7 +168,7 @@
                             <children>
                                 <ImageView fitHeight="161.0" fitWidth="318.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="file:/D:/Mappák/uni/Szoftverfejlesztés/JavaFX1/resources/male.png" />
+                                        <Image url="@../images/male.png" />
                                     </image>
                                 </ImageView>
                             </children>
@@ -219,6 +219,7 @@
                                         <Font size="24.0" />
                                     </font>
                                 </Label>
+                        <ChoiceBox prefWidth="150.0" />
                             </children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
