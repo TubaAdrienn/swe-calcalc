@@ -6,7 +6,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" style="-fx-background-color: whitesmoke;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0"
+          style="-fx-background-color: whitesmoke;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="caloriescalc.controller.SecondaryController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="140.0" />
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="60.0" />
@@ -100,7 +101,7 @@
                                                         <Font size="15.0" />
                                                     </font>
                                                 </Label>
-                                                <TextField prefHeight="25.0" prefWidth="45.0" />
+                                                <TextField fx:id="weightField" prefHeight="25.0" prefWidth="45.0" />
                                             </children>
                                             <padding>
                                                 <Insets left="20.0" />
@@ -113,7 +114,7 @@
                                                         <Font size="15.0" />
                                                     </font>
                                                 </Label>
-                                                <TextField prefHeight="25.0" prefWidth="45.0" />
+                                                <TextField fx:id="heightField" prefHeight="25.0" prefWidth="45.0" />
                                             </children>
                                             <padding>
                                                 <Insets left="20.0" />
@@ -123,7 +124,7 @@
                                 </GridPane>
                                 <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-alignment: Center;" GridPane.rowIndex="1">
                                     <children>
-                                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" style="-fx-background-color: lightgreen; -fx-font-weight: bold;" text="SZÁMOLJ!" />
+                                        <Button fx:id="BMIButton" mnemonicParsing="false" onAction="#bmiCalc" prefHeight="25.0" prefWidth="104.0" style="-fx-background-color: lightgreen; -fx-font-weight: bold;" text="SZÁMOLJ!" />
                                         <Label prefHeight="32.0" prefWidth="138.0" style="-fx-font-weight: bold;" text="BMI érték:">
                                             <padding>
                                                 <Insets left="10.0" />
@@ -132,10 +133,7 @@
                                                 <Font size="22.0" />
                                             </font>
                                         </Label>
-                                        <Label alignment="CENTER_RIGHT" layoutX="132.0" layoutY="21.0" prefHeight="32.0" prefWidth="42.0" style="-fx-font-weight: bold;" text="0">
-                                            <font>
-                                                <Font size="22.0" />
-                                            </font>
+                                        <Label fx:id="bmiValue" alignment="CENTER" layoutX="132.0" layoutY="21.0" prefHeight="32.0" prefWidth="160.0" style="-fx-font-weight: bold;" text="0">
                                             <padding>
                                                 <Insets right="15.0" />
                                             </padding>
@@ -240,7 +238,17 @@
                                 <Insets left="15.0" />
                             </padding>
                             <children>
-                                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: lightgreen; -fx-font-weight: bold;" text="HOZZÁADÁS" />
+                                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0"
+                                        style="-fx-background-color: lightgreen; -fx-font-weight: bold;" text="HOZZÁADÁS">
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin></Button>
+                        <Button fx:id="naploButton" onAction="#goToLogs" layoutX="25.0" layoutY="35.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0"
+                                style="-fx-background-color: lightgreen; -fx-font-weight: bold;" text="NAPLO">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Button>
                             </children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="158.0" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">

@@ -1,38 +1,60 @@
 package caloriescalc.model;
 
+import java.util.Date;
+
 public class ConsumedFood {
 
-    private String name;
-    private double carolies;
-    private double fat;
-    private double carbo;
-    private double protein;
+    private Date date;
+    private double allCalories;
+    private double allFat;
+    private double allCarbo;
+    private double allProtein;
 
-    public ConsumedFood(String name, double carolies, double fat, double carbo, double protein) {
-        this.name = name;
-        this.carolies = carolies;
-        this.fat = fat;
-        this.carbo = carbo;
-        this.protein = protein;
+    public ConsumedFood(Date date, double allCalories, double allFat, double allCarbo, double allProtein) {
+        this.date = date;
+        this.allCalories = allCalories;
+        this.allFat = allFat;
+        this.allCarbo = allCarbo;
+        this.allProtein = allProtein;
     }
 
-    public String getName() {
-        return name;
+    public Date getDate() {
+        return date;
     }
 
-    public double getConsumedCarolies(double consumedGrams) {
-        return this.carolies*consumedGrams;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
-    public double getConsumedFat(double consumedGrams) {
-        return this.fat*consumedGrams;
+    public double getAllCalories() {
+        return allCalories;
     }
 
-    public double getConsumedCarboCarbo(double consumedGrams) {
-        return carbo*consumedGrams;
+    public void setAllCalories(double allCalories) {
+        this.allCalories = allCalories;
     }
 
-    public double getProtein(double consumedGrams) {
-        return protein*consumedGrams;
+    public double getAllFat() {
+        return allFat;
+    }
+
+    public void setAllFat(double allFat) {
+        this.allFat = allFat;
+    }
+
+    public double getAllCarbo() {
+        return allCarbo;
+    }
+
+    public void setAllCarbo(double allCarbo) {
+        this.allCarbo = allCarbo;
+    }
+
+    public double getAllProtein() {
+        return allProtein;
+    }
+
+    public void setAllProtein(double allProtein) {
+        this.allProtein = allProtein;
     }
 }
