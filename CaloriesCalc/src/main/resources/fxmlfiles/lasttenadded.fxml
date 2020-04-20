@@ -14,7 +14,7 @@
                   <Insets bottom="15.0" left="15.0" top="15.0" />
                </VBox.margin>
             </Button>
-            <TableView editable="true" prefHeight="546.0" prefWidth="800.0" style="-fx-background-color: lighgrey; -fx-border-color: black;">
+            <TableView editable="true" prefHeight="546.0" prefWidth="800.0" style="-fx-background-color: lightgrey; -fx-border-color: black;">
               <columns>
                 <TableColumn maxWidth="95.0" prefWidth="145.0" style="-fx-background-color: lightgreen;" text="Név" />
                 <TableColumn prefWidth="145.0" style="-fx-background-color: lightgreen;" text="Kalória" />

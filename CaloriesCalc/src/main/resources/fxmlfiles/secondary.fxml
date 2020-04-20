@@ -6,8 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0"
-          style="-fx-background-color: whitesmoke;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="caloriescalc.controller.SecondaryController">
+<GridPane gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" style="-fx-background-color: whitesmoke;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="caloriescalc.controller.SecondaryController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="140.0" />
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="60.0" />
@@ -238,15 +237,18 @@
                                 <Insets left="15.0" />
                             </padding>
                             <children>
-                                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0"
-                                        style="-fx-background-color: lightgreen; -fx-font-weight: bold;" text="HOZZÁADÁS">
+                                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: lightgreen; -fx-font-weight: bold;" text="HOZZÁADÁS">
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin></Button>
-                        <Button fx:id="naploButton" onAction="#goToLogs" layoutX="25.0" layoutY="35.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0"
-                                style="-fx-background-color: lightgreen; -fx-font-weight: bold;" text="NAPLO">
+                        <Button fx:id="saveButton" layoutX="25.0" layoutY="35.0" mnemonicParsing="false"  prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: lightgreen; -fx-font-weight: bold;" text="MENTES">
                            <HBox.margin>
-                              <Insets left="5.0" />
+                              <Insets left="5.0" right="5.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="naploButton" layoutX="235.0" layoutY="35.0" mnemonicParsing="false" onAction="#goToLogs" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: lightgreen; -fx-font-weight: bold;" text="NAPLO">
+                           <HBox.margin>
+                              <Insets left="5.0" right="15.0" />
                            </HBox.margin>
                         </Button>
                             </children>
