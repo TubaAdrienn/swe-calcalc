@@ -216,7 +216,7 @@
                                         <Font size="24.0" />
                                     </font>
                                 </Label>
-                        <ChoiceBox prefWidth="150.0" />
+                        <ChoiceBox fx:id="foodBox" prefWidth="150.0" />
                             </children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
@@ -241,7 +241,7 @@
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin></Button>
-                        <Button fx:id="saveButton" layoutX="25.0" layoutY="35.0" mnemonicParsing="false"  prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: lightgreen; -fx-font-weight: bold;" text="MENTES">
+                        <Button fx:id="saveButton" layoutX="25.0" layoutY="35.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: lightgreen; -fx-font-weight: bold;" text="MENTES">
                            <HBox.margin>
                               <Insets left="5.0" right="5.0" />
                            </HBox.margin>

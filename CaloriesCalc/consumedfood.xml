@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<food>
+    <data>
+        <name>user1</name>
+        <allcalories>2111.0</allcalories>
+        <allfat>334.0</allfat>
+        <allcarbo>234.0</allcarbo>
+        <allprotein>34.04</allprotein>
+    </data>
+    <data>
+        <name>user2</name>
+        <allcalories>2111.0</allcalories>
+        <allfat>334.0</allfat>
+        <allcarbo>234.0</allcarbo>
+        <allprotein>34.04</allprotein>
+    </data>
+</food>

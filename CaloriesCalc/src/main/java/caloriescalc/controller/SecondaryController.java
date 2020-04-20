@@ -1,19 +1,24 @@
 package caloriescalc.controller;
 
+import caloriescalc.dao.Database;
 import caloriescalc.model.BmiCalc;
+import caloriescalc.model.ConsumedFood;
+import caloriescalc.model.FoodList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 
-public class SecondaryController {
+public class SecondaryController{
 
     @FXML
     private TextField weightField;
@@ -23,6 +28,30 @@ public class SecondaryController {
 
     @FXML
     private Label bmiValue;
+
+    @FXML
+    private ChoiceBox foodBox;
+
+    private FoodList foodList;
+    private String userName;
+
+    public void initdata(String userName){
+        this.userName = userName;
+        System.out.println(this.userName + "is the username.");
+    }
+
+    @FXML
+    public void  initialize() throws Exception {
+        foodList = new FoodList();
+        Database dao = new Database();
+        File databasePath = new File("food.xml");
+        foodList = (FoodList) dao.loadFood(foodList.getClass(), databasePath);
+
+
+        Object[] lista=foodList.getData().stream().map(ConsumedFood::getName).sorted().toArray();
+        foodBox.getItems().addAll(lista);
+
+    }
 
 
     public void bmiCalc(ActionEvent calcBMIEvent) throws IOException {
