@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <food>
     <data>
-        <name>Csirkemell</name>
-        <calories>120</calories>
-        <fat>2.6</fat>
-        <carbo>0</carbo>
-        <protein>22.5</protein>
-    </data>
+    <name>Csirkemell</name>
+    <calories>120</calories>
+    <fat>2.6</fat>
+    <carbo>0</carbo>
+    <protein>22.5</protein>
+</data>
     <data>
         <name>Csirkecomb</name>
         <calories>116</calories>

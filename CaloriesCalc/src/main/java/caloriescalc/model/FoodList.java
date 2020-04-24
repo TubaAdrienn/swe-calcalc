@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
+import java.util.Optional;
 
 @XmlRootElement(name="food")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -18,13 +19,11 @@ public class FoodList {
         this.data = data;
     }
 
-    public void setData(List<ConsumedFood> data) {
-        this.data = data;
-    }
-
-    public List<ConsumedFood> getData() {
-        return data;
-    }
-
     public FoodList(){}
+
+    public ConsumedFood getFoodItemByName(String nameOfFood){
+        Optional<ConsumedFood> consumedFood=data.stream().filter(name->name.getName()==nameOfFood).findAny();
+        System.out.println(consumedFood.get());
+        return consumedFood.get();
+    }
 }

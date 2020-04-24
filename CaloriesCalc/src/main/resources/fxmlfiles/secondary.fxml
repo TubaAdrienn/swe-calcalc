@@ -229,7 +229,7 @@
                                         <Font size="24.0" />
                                     </font>
                                 </Label>
-                                <TextField prefHeight="25.0" prefWidth="72.0" />
+                                <TextField fx:id="gramsField" prefHeight="25.0" prefWidth="72.0" />
                             </children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="84.0" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
@@ -237,20 +237,24 @@
                                 <Insets left="15.0" />
                             </padding>
                             <children>
-                                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: lightgreen; -fx-font-weight: bold;" text="HOZZÁADÁS">
+                                <Button fx:id="addPortionButton" mnemonicParsing="false" onAction="#addPortion" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: lightgreen; -fx-font-weight: bold;" text="HOZZÁADÁS">
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin></Button>
-                        <Button fx:id="saveButton" layoutX="25.0" layoutY="35.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: lightgreen; -fx-font-weight: bold;" text="MENTES">
+                        <Button fx:id="saveButton" layoutX="25.0" layoutY="35.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: lightgreen; -fx-font-weight: bold;" text="MENTÉS">
                            <HBox.margin>
                               <Insets left="5.0" right="5.0" />
                            </HBox.margin>
                         </Button>
-                        <Button fx:id="naploButton" layoutX="235.0" layoutY="35.0" mnemonicParsing="false" onAction="#goToLogs" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: lightgreen; -fx-font-weight: bold;" text="NAPLO">
+                        <Button fx:id="nullButton" layoutX="235.0" layoutY="35.0" mnemonicParsing="false" onAction="#zeroValues" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: lightgreen; -fx-font-weight: bold;" text="NULLÁZD">
                            <HBox.margin>
-                              <Insets left="5.0" right="15.0" />
+                              <Insets left="5.0" right="10.0" />
                            </HBox.margin>
                         </Button>
+                        <Button fx:id="naploButton" layoutX="305.0" layoutY="35.0" mnemonicParsing="false" onAction="#goToLogs" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: lightgreen; -fx-font-weight: bold;" text="NAPLÓ">
+                           <HBox.margin>
+                              <Insets right="15.0" />
+                           </HBox.margin></Button>
                             </children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="158.0" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
@@ -263,11 +267,19 @@
                                         <Font size="24.0" />
                                     </font>
                                 </Label>
-                                <Label text="0 kcal">
+                                <Label fx:id="allCaloriesText" text="0">
                                     <font>
                                         <Font size="24.0" />
                                     </font>
                                 </Label>
+                        <Label layoutX="277.0" layoutY="30.0" text="kcal">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="15.0" />
+                           </HBox.margin>
+                        </Label>
                             </children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="232.0" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
@@ -280,11 +292,19 @@
                                         <Font size="24.0" />
                                     </font>
                                 </Label>
-                                <Label text="0 g">
+                                <Label fx:id="allProteinText" text="0">
                                     <font>
                                         <Font size="24.0" />
                                     </font>
                                 </Label>
+                        <Label layoutX="277.0" layoutY="30.0" text="g">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                           <padding>
+                              <Insets left="15.0" />
+                           </padding>
+                        </Label>
                             </children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="306.0" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
@@ -297,11 +317,19 @@
                                         <Font size="24.0" />
                                     </font>
                                 </Label>
-                                <Label text="0 g">
+                                <Label fx:id="allFatText" text="0">
                                     <font>
                                         <Font size="24.0" />
                                     </font>
                                 </Label>
+                        <Label layoutX="277.0" layoutY="29.0" text="g">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="15.0" />
+                           </HBox.margin>
+                        </Label>
                             </children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="380.0" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6">
@@ -314,11 +342,19 @@
                                         <Font size="24.0" />
                                     </font>
                                 </Label>
-                                <Label text="0 g">
+                                <Label fx:id="allCarbText" text="0">
                                     <font>
                                         <Font size="24.0" />
                                     </font>
                                 </Label>
+                        <Label layoutX="277.0" layoutY="29.0" text="g">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="15.0" />
+                           </HBox.margin>
+                        </Label>
                             </children>
                         </HBox>
                     </children>

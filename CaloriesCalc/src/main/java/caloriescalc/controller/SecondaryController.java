@@ -17,6 +17,8 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class SecondaryController{
 
@@ -27,6 +29,21 @@ public class SecondaryController{
     private TextField heightField;
 
     @FXML
+    private Label allCaloriesText;
+
+    @FXML
+    private Label allFatText;
+
+    @FXML
+    private Label allCarbText;
+
+    @FXML
+    private Label allProteinText;
+
+    @FXML
+    private TextField gramsField;
+
+    @FXML
     private Label bmiValue;
 
     @FXML
@@ -34,11 +51,13 @@ public class SecondaryController{
 
     private FoodList foodList;
     private String userName;
+    private double currentCal=0, currentFat=0, currentProt=0, currentCarb=0;
 
     public void initdata(String userName){
         this.userName = userName;
         System.out.println(this.userName + "is the username.");
     }
+
 
     @FXML
     public void  initialize() throws Exception {
@@ -46,9 +65,7 @@ public class SecondaryController{
         Database dao = new Database();
         File databasePath = new File("food.xml");
         foodList = (FoodList) dao.loadFood(foodList.getClass(), databasePath);
-
-
-        Object[] lista=foodList.getData().stream().map(ConsumedFood::getName).sorted().toArray();
+        List<String> lista=foodList.getData().stream().map(ConsumedFood::getName).sorted().collect(Collectors.toList());
         foodBox.getItems().addAll(lista);
 
     }
@@ -78,6 +95,22 @@ public class SecondaryController{
             }
         }
 
+    public void addPortion(ActionEvent setValues) throws Exception{
+        calculateNewValues();
+        allCaloriesText.setText(Double.toString(currentCal));
+        allCarbText.setText(Double.toString(currentCarb));
+        allFatText.setText(Double.toString(currentFat));
+        allProteinText.setText(Double.toString(currentProt));
+    }
+
+    public void zeroValues(ActionEvent actionEvent) {
+        currentCal=currentFat=currentProt=currentCarb=0;
+        allCaloriesText.setText("0");
+        allCarbText.setText("0");
+        allFatText.setText("0");
+        allProteinText.setText("0");
+    }
+
     public void goToLogs(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmlfiles/lasttenadded.fxml"));
         Parent root = fxmlLoader.load();
@@ -86,6 +119,22 @@ public class SecondaryController{
         stage.setScene(new Scene(root));
         stage.show();
     }
+
+    public void calculateNewValues(){
+        if(foodBox.getValue()!=null && !(gramsField.getText().isEmpty())){
+            double gramsInput=-1;
+            gramsInput=Double.parseDouble(gramsField.getText());
+            if(gramsInput>=0) {
+                String chosenFood = (String) foodBox.getValue();
+                ConsumedFood foodItem = foodList.getFoodItemByName(chosenFood);
+                currentCal += foodItem.getCalPortion(gramsInput);
+                currentProt+=foodItem.getProteinPortion(gramsInput);
+                currentFat+=foodItem.getFatPortion(gramsInput);
+                currentCarb+=foodItem.getCarboPortion(gramsInput);
+            }
+        }
+    }
+
 }
 
 

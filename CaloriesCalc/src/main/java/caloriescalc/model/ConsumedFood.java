@@ -36,4 +36,20 @@ public class ConsumedFood{
     public String getName() {
         return name;
     }
+
+    public double getCalPortion(double grams){
+        return (grams/100)*this.calories;
+    }
+
+    public double getFatPortion(double grams){
+        return (grams/100)*this.fat;
+    }
+
+    public double getCarboPortion(double grams){
+        return (grams/100)*this.carbo;
+    }
+
+    public double getProteinPortion(double grams){
+        return (grams/100)*this.protein;
+    }
 }
