@@ -1,6 +1,6 @@
 package caloriescalc.model;
 
-import caloriescalc.dao.DateAdapter;
+import caloriescalc.util.DateAdapter;
 import lombok.Data;
 
 import javax.xml.bind.annotation.XmlAccessType;

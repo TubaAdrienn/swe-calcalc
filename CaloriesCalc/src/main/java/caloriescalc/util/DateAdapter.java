@@ -1,4 +1,4 @@
-package caloriescalc.dao;
+package caloriescalc.util;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 import java.time.LocalDate;

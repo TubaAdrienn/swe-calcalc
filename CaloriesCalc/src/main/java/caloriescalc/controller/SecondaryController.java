@@ -4,6 +4,7 @@ import caloriescalc.dao.Database;
 import caloriescalc.model.BmiCalc;
 import caloriescalc.model.ConsumedFood;
 import caloriescalc.model.FoodList;
+import caloriescalc.util.Rounder;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -97,10 +98,10 @@ public class SecondaryController{
 
     public void addPortion(ActionEvent setValues) throws Exception{
         calculateNewValues();
-        allCaloriesText.setText(Double.toString(currentCal));
-        allCarbText.setText(Double.toString(currentCarb));
-        allFatText.setText(Double.toString(currentFat));
-        allProteinText.setText(Double.toString(currentProt));
+        allCaloriesText.setText(Double.toString(Rounder.roundOff(currentCal)));
+        allCarbText.setText(Double.toString(Rounder.roundOff(currentCarb)));
+        allFatText.setText(Double.toString(Rounder.roundOff(currentFat)));
+        allProteinText.setText(Double.toString(Rounder.roundOff(currentProt)));
     }
 
     public void zeroValues(ActionEvent actionEvent) {
@@ -112,7 +113,7 @@ public class SecondaryController{
     }
 
     public void goToLogs(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmlfiles/lasttenadded.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmlfiles/useraddedlog.fxml"));
         Parent root = fxmlLoader.load();
         fxmlLoader.<SecondaryController>getController();
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -120,18 +121,20 @@ public class SecondaryController{
         stage.show();
     }
 
-    public void calculateNewValues(){
-        if(foodBox.getValue()!=null && !(gramsField.getText().isEmpty())){
-            double gramsInput=-1;
-            gramsInput=Double.parseDouble(gramsField.getText());
-            if(gramsInput>=0) {
-                String chosenFood = (String) foodBox.getValue();
-                ConsumedFood foodItem = foodList.getFoodItemByName(chosenFood);
-                currentCal += foodItem.getCalPortion(gramsInput);
-                currentProt+=foodItem.getProteinPortion(gramsInput);
-                currentFat+=foodItem.getFatPortion(gramsInput);
-                currentCarb+=foodItem.getCarboPortion(gramsInput);
-            }
+    public void calculateNewValues() throws Exception{
+        if(foodBox.getValue()!=null)
+            try {
+                double gramsInput = Double.parseDouble(gramsField.getText());
+                if (gramsInput >= 0) {
+                    String chosenFood = (String) foodBox.getValue();
+                    ConsumedFood foodItem = foodList.getFoodItemByName(chosenFood);
+                    currentCal += foodItem.getCalPortion(gramsInput);
+                    currentProt += foodItem.getProteinPortion(gramsInput);
+                    currentFat += foodItem.getFatPortion(gramsInput);
+                    currentCarb += foodItem.getCarboPortion(gramsInput);
+                }
+            } catch (Exception e){
+                System.out.println("That's not right, buddy.");
         }
     }
 
