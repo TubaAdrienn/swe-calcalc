@@ -5,7 +5,7 @@
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxWidth="800.0" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="caloriescalc.controller.LastTenDaysAddedController">
+<AnchorPane maxWidth="800.0" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="caloriescalc.controller.LogController">
    <children>
       <VBox prefHeight="550.0" prefWidth="800.0">
          <children>
@@ -14,14 +14,14 @@
                   <Insets bottom="15.0" left="15.0" top="15.0" />
                </VBox.margin>
             </Button>
-            <TableView editable="true" prefHeight="546.0" prefWidth="800.0" style="-fx-background-color: lightgrey; -fx-border-color: black;">
+            <TableView fx:id="logTable" editable="false" prefHeight="546.0" prefWidth="800.0" style="-fx-background-color: lightgrey; -fx-border-color: black;">
               <columns>
-                <TableColumn maxWidth="95.0" prefWidth="145.0" style="-fx-background-color: lightgreen;" text="Név" />
-                <TableColumn prefWidth="145.0" style="-fx-background-color: lightgreen;" text="Kalória" />
-                  <TableColumn prefWidth="145.0" style="-fx-background-color: lightgreen;" text="Zsír" />
-                  <TableColumn prefWidth="145.0" style="-fx-background-color: lightgreen;" text="Szénhidrát" />
-                  <TableColumn prefWidth="145.0" style="-fx-background-color: lightgreen;" text="Fehérje" />
-                  <TableColumn prefWidth="145.0" style="-fx-background-color: lightgreen;" text="Nap" />
+                <TableColumn fx:id="nameCol" editable="false" prefWidth="133.0" sortable="false" style="-fx-background-color: lightgreen; -fx-border-color: black;" text="Név" />
+                <TableColumn fx:id="calCol" prefWidth="133.0" style="-fx-background-color: lightgreen; -fx-border-color: black;" text="Kalória" />
+                  <TableColumn fx:id="fatCol" prefWidth="133.0" style="-fx-background-color: lightgreen; -fx-border-color: black;" text="Zsír" />
+                  <TableColumn fx:id="carbCol" prefWidth="133.0" style="-fx-background-color: lightgreen; -fx-border-color: black;" text="Szénhidrát" />
+                  <TableColumn fx:id="protCol" prefWidth="133.0" style="-fx-background-color: lightgreen; -fx-border-color: black;" text="Fehérje" />
+                  <TableColumn fx:id="dateCol" prefWidth="133.0" style="-fx-background-color: lightgreen; -fx-border-color: black;" text="Nap" />
               </columns>
                <effect>
                   <DropShadow />

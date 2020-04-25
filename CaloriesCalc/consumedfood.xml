@@ -1,17 +1,43 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <food>
     <data>
-        <name>user1</name>
-        <allcalories>2111.0</allcalories>
-        <allfat>334.0</allfat>
-        <allcarbo>234.0</allcarbo>
-        <allprotein>34.04</allprotein>
+        <name>asd</name>
+        <calories>63.96</calories>
+        <fat>0.25</fat>
+        <carbo>14.02</carbo>
+        <protein>0.37</protein>
+        <date>2020-04-25</date>
     </data>
     <data>
-        <name>user2</name>
-        <allcalories>2111.0</allcalories>
-        <allfat>334.0</allfat>
-        <allcarbo>234.0</allcarbo>
-        <allprotein>34.04</allprotein>
+        <name>asd</name>
+        <calories>191.88</calories>
+        <fat>0.74</fat>
+        <carbo>42.07</carbo>
+        <protein>1.11</protein>
+        <date>2020-04-25</date>
+    </data>
+    <data>
+        <name>asd</name>
+        <calories>127.92</calories>
+        <fat>0.49</fat>
+        <carbo>28.04</carbo>
+        <protein>0.74</protein>
+        <date>2020-04-25</date>
+    </data>
+    <data>
+        <name>asd</name>
+        <calories>959.4</calories>
+        <fat>2.21</fat>
+        <carbo>208.85</carbo>
+        <protein>17.71</protein>
+        <date>2020-04-25</date>
+    </data>
+    <data>
+        <name>asd</name>
+        <calories>4757.55</calories>
+        <fat>316.37</fat>
+        <carbo>0.0</carbo>
+        <protein>449.19</protein>
+        <date>2020-04-25</date>
     </data>
 </food>

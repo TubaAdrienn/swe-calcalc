@@ -26,4 +26,12 @@ public class FoodList {
         System.out.println(consumedFood.get());
         return consumedFood.get();
     }
+
+    public List<ConsumedFood> getData() {
+        return data;
+    }
+
+    public void setData(List<ConsumedFood> data) {
+        this.data = data;
+    }
 }

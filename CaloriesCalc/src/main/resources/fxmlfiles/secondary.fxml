@@ -241,7 +241,7 @@
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin></Button>
-                        <Button fx:id="saveButton" layoutX="25.0" layoutY="35.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: lightgreen; -fx-font-weight: bold;" text="MENTÉS">
+                        <Button fx:id="saveButton" layoutX="25.0" layoutY="35.0" mnemonicParsing="false" onAction="#saveValues" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: lightgreen; -fx-font-weight: bold;" text="MENTÉS">
                            <HBox.margin>
                               <Insets left="5.0" right="5.0" />
                            </HBox.margin>

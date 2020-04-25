@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class Database {
 
-    public void saveLog(FoodList foodlog) throws Exception {
+    public static void saveLog(FoodList foodlog) throws Exception {
         try {
             JAXBContext context = JAXBContext.newInstance(foodlog.getClass());
             Marshaller marshaller = context.createMarshaller();
@@ -25,7 +25,7 @@ public class Database {
         }
     }
 
-    public <T> T loadFood(Class<T> clazz, File file) throws JAXBException, IOException {
+    public static <T> T loadFood(Class<T> clazz, File file) throws JAXBException, IOException {
         try {
             FileInputStream is=new FileInputStream(file);
             JAXBContext context = JAXBContext.newInstance(clazz);

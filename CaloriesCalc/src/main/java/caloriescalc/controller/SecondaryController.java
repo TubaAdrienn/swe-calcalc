@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -50,7 +51,7 @@ public class SecondaryController{
     @FXML
     private ChoiceBox foodBox;
 
-    private FoodList foodList;
+    private FoodList foodList, loggedFoodList=new FoodList();
     private String userName;
     private double currentCal=0, currentFat=0, currentProt=0, currentCarb=0;
 
@@ -63,12 +64,18 @@ public class SecondaryController{
     @FXML
     public void  initialize() throws Exception {
         foodList = new FoodList();
-        Database dao = new Database();
         File databasePath = new File("food.xml");
-        foodList = (FoodList) dao.loadFood(foodList.getClass(), databasePath);
+        File logPath=new File("consumedfood.xml");
+        foodList = (FoodList) Database.loadFood(foodList.getClass(), databasePath);
         List<String> lista=foodList.getData().stream().map(ConsumedFood::getName).sorted().collect(Collectors.toList());
         foodBox.getItems().addAll(lista);
-
+        if(logPath.length()!=0) {
+            loggedFoodList = Database.loadFood(FoodList.class, logPath);
+            System.out.println("EZ ITT AMIT BETÖLTÖTTEM: ");
+            System.out.println(loggedFoodList);
+        } else{
+            System.out.println("Ez üres, babey");
+        }
     }
 
 
@@ -112,13 +119,17 @@ public class SecondaryController{
         allProteinText.setText("0");
     }
 
-    public void goToLogs(ActionEvent actionEvent) throws IOException {
+    public void loadLogScene(ActionEvent actionEvent) throws IOException{
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmlfiles/useraddedlog.fxml"));
         Parent root = fxmlLoader.load();
-        fxmlLoader.<SecondaryController>getController();
+        fxmlLoader.<LogController>getController().initdata(loggedFoodList, userName);
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
+    }
+
+    public void goToLogs(ActionEvent actionEvent) throws IOException {
+        loadLogScene(actionEvent);
     }
 
     public void calculateNewValues() throws Exception{
@@ -138,6 +149,36 @@ public class SecondaryController{
         }
     }
 
+    public void saveValues(ActionEvent actionEvent) throws Exception {
+
+        if(currentCarb+currentFat+currentProt+currentCal>0){
+            ConsumedFood foodToLog = new ConsumedFood(userName, Rounder.roundOff(currentCal),
+                    Rounder.roundOff(currentFat), Rounder.roundOff(currentCarb),
+                    Rounder.roundOff(currentProt), LocalDate.now());
+            System.out.println("Food to log: ");
+            System.out.println(foodToLog);
+            System.out.println(loggedFoodList);
+            System.out.println("Eddig megvagyok.");
+            if(loggedFoodList.getData()==null){
+                List<ConsumedFood> lista=List.of(foodToLog);
+                loggedFoodList.setData(lista);
+                System.out.println(loggedFoodList.getData());
+                Database.saveLog(loggedFoodList);
+            }
+            else {
+                loggedFoodList.getData().add(foodToLog);
+                System.out.println(loggedFoodList.getData());
+                Database.saveLog(loggedFoodList);
+            }
+            loadLogScene(actionEvent);
+            currentCal=currentFat=currentProt=currentCarb=0;
+
+        }
+        else{
+            System.out.println("Nincs mit menteni.");
+        }
+
+    }
 }
 
 
