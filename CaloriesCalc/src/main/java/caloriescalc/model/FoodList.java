@@ -30,8 +30,4 @@ public class FoodList {
     public List<ConsumedFood> getData() {
         return data;
     }
-
-    public void setData(List<ConsumedFood> data) {
-        this.data = data;
-    }
 }

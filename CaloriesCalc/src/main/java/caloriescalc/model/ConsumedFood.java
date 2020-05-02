@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder = {"name", "calories", "fat", "carbo", "protein","date"})
 @Data
-public class ConsumedFood{
+public class ConsumedFood {
 
     private String name;
     private double calories;
@@ -30,7 +30,6 @@ public class ConsumedFood{
         this.fat = fat;
         this.carbo = carbo;
         this.protein = protein;
-        this.date = date;
     }
 
     public String getName() {

@@ -1,9 +1,9 @@
 package caloriescalc.controller;
 
 import caloriescalc.dao.Database;
-import caloriescalc.model.BmiCalc;
 import caloriescalc.model.ConsumedFood;
 import caloriescalc.model.FoodList;
+import caloriescalc.util.BmiCalc;
 import caloriescalc.util.Rounder;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -81,27 +81,27 @@ public class SecondaryController{
 
     public void bmiCalc(ActionEvent calcBMIEvent) throws IOException {
 
-            if (weightField.getText().isEmpty() || heightField.getText().isEmpty()) {
-                bmiValue.setText("Nincs érték.");
-                bmiValue.setStyle("-fx-text-fill: red;");
-            } else {
-                try {
-                    int weight = Integer.parseInt(weightField.getText());
-                    int height = Integer.parseInt(heightField.getText());
-                    if (!(weight > 595 || height> 272 || weight<25 || height<50)) {
-                        double bmiVal=new BmiCalc().bmiCalculation(weight,height);
-                        bmiValue.setText(Double.toString(bmiVal));
-                        bmiValue.setStyle("-fx-text-fill: black;");
-                    } else {
-                        bmiValue.setText("Irreális érték.");
-                        bmiValue.setStyle("-fx-text-fill: red;");
-                    }
-                }catch (Exception e) {
-                    bmiValue.setText("Számot adj meg.");
+        if (weightField.getText().isEmpty() || heightField.getText().isEmpty()) {
+            bmiValue.setText("Nincs érték.");
+            bmiValue.setStyle("-fx-text-fill: red;");
+        } else {
+            try {
+                int weight = Integer.parseInt(weightField.getText());
+                int height = Integer.parseInt(heightField.getText());
+                if (!(weight > 595 || height> 272 || weight<25 || height<50)) {
+                    double bmiVal=BmiCalc.bmiCalculation(weight,height);
+                    bmiValue.setText(Double.toString(bmiVal));
+                    bmiValue.setStyle("-fx-text-fill: black;");
+                } else {
+                    bmiValue.setText("Irreális érték.");
                     bmiValue.setStyle("-fx-text-fill: red;");
                 }
+            }catch (Exception e) {
+                bmiValue.setText("Számot adj meg.");
+                bmiValue.setStyle("-fx-text-fill: red;");
             }
         }
+    }
 
     public void addPortion(ActionEvent setValues) throws Exception{
         calculateNewValues();
@@ -146,7 +146,7 @@ public class SecondaryController{
                 }
             } catch (Exception e){
                 System.out.println("That's not right, buddy.");
-        }
+            }
     }
 
     public void saveValues(ActionEvent actionEvent) throws Exception {
@@ -180,5 +180,3 @@ public class SecondaryController{
 
     }
 }
-
-
