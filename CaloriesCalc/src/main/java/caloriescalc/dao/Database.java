@@ -7,6 +7,9 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.net.URL;
 
 public class Database {
 
@@ -16,7 +19,13 @@ public class Database {
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
             marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
-            marshaller.marshal(foodlog, new File("src/main/resources/data/consumedfood.xml"));
+            URL url = Database.class.getResource("/data/consumedfood.xml");
+            System.out.println(url);
+            File file = new File(url.toURI());
+            System.out.println(file);
+            OutputStream outputStream = new FileOutputStream(file);
+            marshaller.marshal(foodlog, file);
+            marshaller.marshal(foodlog,System.out);
         } catch(JAXBException e) {
             throw e;
         }
