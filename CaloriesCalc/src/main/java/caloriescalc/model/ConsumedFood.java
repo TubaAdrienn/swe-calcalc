@@ -1,6 +1,7 @@
 package caloriescalc.model;
 
 import caloriescalc.util.DateAdapter;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -11,6 +12,7 @@ import java.time.LocalDate;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder = {"name", "calories", "fat", "carbo", "protein","date"})
+@AllArgsConstructor
 @Data
 public class ConsumedFood {
 
@@ -24,7 +26,7 @@ public class ConsumedFood {
 
     public ConsumedFood(){}
 
-    public ConsumedFood(String name, double calories, double fat, double carbo, double protein, LocalDate date) {
+    public ConsumedFood(String name, double calories, double fat, double carbo, double protein) {
         this.name = name;
         this.calories = calories;
         this.fat = fat;

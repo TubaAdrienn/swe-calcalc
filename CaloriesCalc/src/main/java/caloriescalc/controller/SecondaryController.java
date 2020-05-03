@@ -14,6 +14,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -51,7 +53,13 @@ public class SecondaryController{
     @FXML
     private ChoiceBox foodBox;
 
-    private FoodList foodList, loggedFoodList=new FoodList();
+    @FXML
+    private ImageView maleImg;
+
+    @FXML
+    private ImageView femaleImg;
+
+    private FoodList foodList, loggedFoodList;
     private String userName;
     private double currentCal=0, currentFat=0, currentProt=0, currentCarb=0;
 
@@ -63,19 +71,15 @@ public class SecondaryController{
 
     @FXML
     public void  initialize() throws Exception {
+        maleImg.setImage(new Image(getClass().getResource("/images/male.png").toExternalForm()));
+        femaleImg.setImage(new Image(getClass().getResource("/images/female.png").toExternalForm()));
         foodList = new FoodList();
-        File databasePath = new File("food.xml");
-        File logPath=new File("consumedfood.xml");
-        foodList = (FoodList) Database.loadFood(foodList.getClass(), databasePath);
+        foodList = (FoodList) Database.loadFood(foodList.getClass(), "/data/food.xml");
         List<String> lista=foodList.getData().stream().map(ConsumedFood::getName).sorted().collect(Collectors.toList());
         foodBox.getItems().addAll(lista);
-        if(logPath.length()!=0) {
-            loggedFoodList = Database.loadFood(FoodList.class, logPath);
-            System.out.println("EZ ITT AMIT BETÖLTÖTTEM: ");
-            System.out.println(loggedFoodList);
-        } else{
-            System.out.println("Ez üres, babey");
-        }
+        loggedFoodList = (FoodList) Database.loadFood(FoodList.class,"/data/consumedfood.xml");
+        System.out.println("EZ ITT AMIT BETÖLTÖTTEM: ");
+        System.out.println(loggedFoodList);
     }
 
 
@@ -155,10 +159,6 @@ public class SecondaryController{
             ConsumedFood foodToLog = new ConsumedFood(userName, Rounder.roundOff(currentCal),
                     Rounder.roundOff(currentFat), Rounder.roundOff(currentCarb),
                     Rounder.roundOff(currentProt), LocalDate.now());
-            System.out.println("Food to log: ");
-            System.out.println(foodToLog);
-            System.out.println(loggedFoodList);
-            System.out.println("Eddig megvagyok.");
             if(loggedFoodList.getData()==null){
                 List<ConsumedFood> lista=List.of(foodToLog);
                 loggedFoodList.setData(lista);
@@ -168,7 +168,7 @@ public class SecondaryController{
             else {
                 loggedFoodList.getData().add(foodToLog);
                 System.out.println(loggedFoodList.getData());
-                Database.saveLog(loggedFoodList);
+                Database.saveLog(loggedFoodList );
             }
             loadLogScene(actionEvent);
             currentCal=currentFat=currentProt=currentCarb=0;

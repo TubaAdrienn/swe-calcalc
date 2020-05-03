@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<food>
+    <data>
+        <name>123</name>
+        <calories>3425.04</calories>
+        <fat>220.46</fat>
+        <carbo>307.36</carbo>
+        <protein>44.73</protein>
+        <date>2020-05-03</date>
+    </data>
+    <data>
+        <name>asd</name>
+        <calories>428.04</calories>
+        <fat>13.65</fat>
+        <carbo>0.0</carbo>
+        <protein>71.59</protein>
+        <date>2020-05-03</date>
+    </data>
+</food>
