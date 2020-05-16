@@ -1,42 +1,24 @@
 package caloriescalc.model;
 
-import caloriescalc.util.DateAdapter;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import java.time.LocalDate;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = {"name", "calories", "fat", "carbo", "protein","date"})
+@XmlType(propOrder = {"name", "calories", "fat", "carbo", "protein"})
 @AllArgsConstructor
-@Data
-public class ConsumedFood {
+@NoArgsConstructor
+public class Food {
 
     private String name;
     private double calories;
     private double fat;
     private double carbo;
     private double protein;
-    @XmlJavaTypeAdapter(DateAdapter.class)
-    private LocalDate date;
 
-    public ConsumedFood(){}
-
-    public ConsumedFood(String name, double calories, double fat, double carbo, double protein) {
-        this.name = name;
-        this.calories = calories;
-        this.fat = fat;
-        this.carbo = carbo;
-        this.protein = protein;
-    }
-
-    public String getName() {
-        return name;
-    }
 
     public double getCalPortion(double grams){
         return (grams/100)*this.calories;
@@ -52,5 +34,9 @@ public class ConsumedFood {
 
     public double getProteinPortion(double grams){
         return (grams/100)*this.protein;
+    }
+
+    public String getName(){
+        return this.name;
     }
 }

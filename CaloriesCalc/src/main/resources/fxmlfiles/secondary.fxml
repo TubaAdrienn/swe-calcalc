@@ -261,7 +261,7 @@
                                         <Font size="24.0" />
                                     </font>
                                 </Label>
-                                <Label fx:id="allCaloriesText" text="0">
+                                <Label fx:id="allCaloriesText" text="0.0">
                                     <font>
                                         <Font size="24.0" />
                                     </font>
@@ -286,7 +286,7 @@
                                         <Font size="24.0" />
                                     </font>
                                 </Label>
-                                <Label fx:id="allProteinText" text="0">
+                                <Label fx:id="allProteinText" text="0.0">
                                     <font>
                                         <Font size="24.0" />
                                     </font>
@@ -311,7 +311,7 @@
                                         <Font size="24.0" />
                                     </font>
                                 </Label>
-                                <Label fx:id="allFatText" text="0">
+                                <Label fx:id="allFatText" text="0.0">
                                     <font>
                                         <Font size="24.0" />
                                     </font>
@@ -336,7 +336,7 @@
                                         <Font size="24.0" />
                                     </font>
                                 </Label>
-                                <Label fx:id="allCarbText" text="0">
+                                <Label fx:id="allCarbText" text="0.0">
                                     <font>
                                         <Font size="24.0" />
                                     </font>

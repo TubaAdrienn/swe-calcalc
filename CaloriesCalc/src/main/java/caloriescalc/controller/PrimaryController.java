@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.tinylog.Logger;
 
 import java.io.IOException;
 
@@ -20,9 +21,11 @@ public class PrimaryController {
     @FXML
     private Label errorText;
 
+
     public void startAction(ActionEvent actionEvent) throws IOException {
         if (nameText.getText().isEmpty()) {
-            errorText.setText("Give me a good username!");
+            errorText.setText("Give me a username!");
+            Logger.error("Empty username.");
         } else {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmlfiles/secondary.fxml"));
             Parent root = fxmlLoader.load();
@@ -30,6 +33,7 @@ public class PrimaryController {
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
+            Logger.info("Successful initialization of second stage.");
         }
 
     }

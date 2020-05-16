@@ -1,8 +1,10 @@
 package caloriescalc.controller;
 
 import caloriescalc.dao.Database;
-import caloriescalc.model.ConsumedFood;
+import caloriescalc.model.DataLog;
+import caloriescalc.model.Food;
 import caloriescalc.model.FoodList;
+import caloriescalc.model.LogList;
 import caloriescalc.util.BmiCalc;
 import caloriescalc.util.Rounder;
 import javafx.event.ActionEvent;
@@ -17,8 +19,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import org.tinylog.Logger;
 
-import java.io.File;
+import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
@@ -59,108 +62,115 @@ public class SecondaryController{
     @FXML
     private ImageView femaleImg;
 
-    private FoodList foodList, loggedFoodList;
+    private FoodList foodList=new FoodList();
+    private LogList loglist;
+    private DataLog dataLog;
     private String userName;
     private double currentCal=0, currentFat=0, currentProt=0, currentCarb=0;
 
     public void initdata(String userName){
         this.userName = userName;
-        System.out.println(this.userName + "is the username.");
+        Logger.debug("The username is {}", this.userName);
     }
 
+    public void setImages(String male, String female){
+        maleImg.setImage(new Image(getClass().getResource(male).toExternalForm()));
+        femaleImg.setImage(new Image(getClass().getResource(female).toExternalForm()));
+        Logger.info("Images set.");
+    }
+
+    public void loadData(String foodData, String loggedData) throws JAXBException {
+        foodList = (FoodList) Database.loadXML(FoodList.class,foodData );
+        Logger.info("Food data loaded.");
+        loglist = (LogList) Database.loadXML(LogList.class,loggedData);
+        Logger.info("Logged data loaded");
+        Logger.debug("Logged data {}", loglist);
+    }
 
     @FXML
     public void  initialize() throws Exception {
-        maleImg.setImage(new Image(getClass().getResource("/images/male.png").toExternalForm()));
-        femaleImg.setImage(new Image(getClass().getResource("/images/female.png").toExternalForm()));
-        foodList = new FoodList();
-        foodList = (FoodList) Database.loadFood(foodList.getClass(), "/data/food.xml");
-        List<String> lista=foodList.getData().stream().map(ConsumedFood::getName).sorted().collect(Collectors.toList());
+        setImages("/images/male.png", "/images/female.png" );
+        loadData("/data/food.xml", "/data/consumedfood.xml");
+        List<String> lista=foodList.getData().stream().map(Food::getName).sorted().collect(Collectors.toList());
         foodBox.getItems().addAll(lista);
-        loggedFoodList = (FoodList) Database.loadFood(FoodList.class,"/data/consumedfood.xml");
-        System.out.println("EZ ITT AMIT BETÖLTÖTTEM: ");
-        System.out.println(loggedFoodList);
+        dataLog=new DataLog(userName, LocalDate.now());
     }
 
+    public void setTextToBMI(String text, String color){
+        bmiValue.setText(text);
+        bmiValue.setStyle("-fx-text-fill: "+color+";");
+    }
 
     public void bmiCalc(ActionEvent calcBMIEvent) throws IOException {
-
         if (weightField.getText().isEmpty() || heightField.getText().isEmpty()) {
-            bmiValue.setText("Nincs érték.");
-            bmiValue.setStyle("-fx-text-fill: red;");
+            setTextToBMI("Nincs érték.", "red");
+            Logger.error("Empty field. Value required.");
         } else {
             try {
                 int weight = Integer.parseInt(weightField.getText());
                 int height = Integer.parseInt(heightField.getText());
                 if (!(weight > 595 || height> 272 || weight<25 || height<50)) {
-                    double bmiVal=BmiCalc.bmiCalculation(weight,height);
-                    bmiValue.setText(Double.toString(bmiVal));
-                    bmiValue.setStyle("-fx-text-fill: black;");
+                    setTextToBMI(Double.toString(BmiCalc.bmiCalculation(weight,height)), "black");
                 } else {
-                    bmiValue.setText("Irreális érték.");
-                    bmiValue.setStyle("-fx-text-fill: red;");
+                    setTextToBMI("Irreális érték.", "red");
+                    Logger.error("Irreal value. Good one required.");
+
                 }
             }catch (Exception e) {
-                bmiValue.setText("Számot adj meg.");
-                bmiValue.setStyle("-fx-text-fill: red;");
+                setTextToBMI("Számot adj meg.","red");
+                Logger.error("Typed value is not a number.");
             }
         }
     }
 
-    public void addPortion(ActionEvent setValues) throws Exception{
-        calculateNewValues();
-        allCaloriesText.setText(Double.toString(Rounder.roundOff(currentCal)));
-        allCarbText.setText(Double.toString(Rounder.roundOff(currentCarb)));
-        allFatText.setText(Double.toString(Rounder.roundOff(currentFat)));
-        allProteinText.setText(Double.toString(Rounder.roundOff(currentProt)));
-    }
-
     public void zeroValues(ActionEvent actionEvent) {
-        currentCal=currentFat=currentProt=currentCarb=0;
-        allCaloriesText.setText("0");
-        allCarbText.setText("0");
-        allFatText.setText("0");
-        allProteinText.setText("0");
+        dataLog.zeroValues();
+        setNutrients();
     }
 
-    public void loadLogScene(ActionEvent actionEvent) throws IOException{
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmlfiles/useraddedlog.fxml"));
-        Parent root = fxmlLoader.load();
-        fxmlLoader.<LogController>getController().initdata(loggedFoodList, userName);
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
+    public void setNutrients(){
+        allCaloriesText.setText(Double.toString(Rounder.roundOff(dataLog.getCal())));
+        allCarbText.setText(Double.toString(Rounder.roundOff(dataLog.getCarb())));
+        allFatText.setText(Double.toString(Rounder.roundOff(dataLog.getFat())));
+        allProteinText.setText(Double.toString(Rounder.roundOff(dataLog.getProt())));
+        Logger.info("New values set.");
     }
 
-    public void goToLogs(ActionEvent actionEvent) throws IOException {
-        loadLogScene(actionEvent);
+    public void addPortionToCurrent(Food foodItem, double gramsInput){
+        dataLog.addToCal(foodItem.getCalPortion(gramsInput));
+        dataLog.addToCarb(foodItem.getCarboPortion(gramsInput));
+        dataLog.addToFat(foodItem.getFatPortion(gramsInput));
+        dataLog.addToProt(foodItem.getProteinPortion(gramsInput));
     }
 
-    public void calculateNewValues() throws Exception{
+    public void setNewValues() throws Exception{
         if(foodBox.getValue()!=null)
             try {
                 double gramsInput = Double.parseDouble(gramsField.getText());
                 if (gramsInput >= 0) {
                     String chosenFood = (String) foodBox.getValue();
-                    ConsumedFood foodItem = foodList.getFoodItemByName(chosenFood);
-                    currentCal += foodItem.getCalPortion(gramsInput);
-                    currentProt += foodItem.getProteinPortion(gramsInput);
-                    currentFat += foodItem.getFatPortion(gramsInput);
-                    currentCarb += foodItem.getCarboPortion(gramsInput);
+                    Food foodItem = foodList.getFoodItemByName(chosenFood);
+                    addPortionToCurrent(foodItem, gramsInput);
+                    setNutrients();
                 }
             } catch (Exception e){
-                System.out.println("That's not right, buddy.");
+                Logger.error("Value is not right. Try again.");
             }
     }
 
-    public void saveValues(ActionEvent actionEvent) throws Exception {
+    public void addPortion(ActionEvent setValues) throws Exception{
+        setNewValues();
+        setNutrients();
+    }
 
-        if(currentCarb+currentFat+currentProt+currentCal>0){
-            ConsumedFood foodToLog = new ConsumedFood(userName, Rounder.roundOff(currentCal),
+
+    public void saveValues(ActionEvent actionEvent) throws Exception {
+       /* if(!dataLog.isEverythingZero()){
+            Food foodToLog = new Food(userName, Rounder.roundOff(currentCal),
                     Rounder.roundOff(currentFat), Rounder.roundOff(currentCarb),
-                    Rounder.roundOff(currentProt), LocalDate.now());
+                    Rounder.roundOff(currentProt));
             if(loggedFoodList.getData()==null){
-                List<ConsumedFood> lista=List.of(foodToLog);
+                List<Food> lista=List.of(foodToLog);
                 loggedFoodList.setData(lista);
                 System.out.println(loggedFoodList.getData());
                 Database.saveLog(loggedFoodList);
@@ -177,6 +187,21 @@ public class SecondaryController{
         else{
             System.out.println("Nincs mit menteni.");
         }
-
+*/
     }
+
+    public void goToLogs(ActionEvent actionEvent) throws IOException {
+        loadLogScene(actionEvent);
+    }
+
+    public void loadLogScene(ActionEvent actionEvent) throws IOException{
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmlfiles/useraddedlog.fxml"));
+        Parent root = fxmlLoader.load();
+        fxmlLoader.<LogController>getController().initdata(loglist, userName);
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
+        Logger.info("New scene successfully set.");
+    }
+
 }

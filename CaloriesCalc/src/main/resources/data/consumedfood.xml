@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<food>
+<logs>
     <data>
-        <name>123</name>
-        <calories>3425.04</calories>
+        <date>2020-05-03</date>
+        <username>123</username>
+        <cal>3425.04</cal>
+        <carb>307.36</carb>
         <fat>220.46</fat>
-        <carbo>307.36</carbo>
-        <protein>44.73</protein>
-        <date>2020-05-03</date>
+        <prot>44.73</prot>
     </data>
     <data>
-        <name>asd</name>
-        <calories>428.04</calories>
-        <fat>13.65</fat>
-        <carbo>0.0</carbo>
-        <protein>71.59</protein>
         <date>2020-05-03</date>
+        <username>asd</username>
+        <cal>428.04</cal>
+        <carb>0.0</carb>
+        <fat>13.65</fat>
+        <prot>71.59</prot>
     </data>
-</food>
+</logs>

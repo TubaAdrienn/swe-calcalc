@@ -1,7 +1,9 @@
 package caloriescalc.controller;
 
-import caloriescalc.model.ConsumedFood;
+import caloriescalc.model.DataLog;
+import caloriescalc.model.Food;
 import caloriescalc.model.FoodList;
+import caloriescalc.model.LogList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,33 +15,34 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+import javax.xml.crypto.Data;
 import java.io.IOException;
 
 public class LogController {
 
     @FXML
-    private TableView<ConsumedFood> logTable;
+    private TableView<DataLog> logTable;
 
     @FXML
-    private TableColumn<ConsumedFood, String> nameCol;
+    private TableColumn<DataLog, String> nameCol;
 
     @FXML
-    private TableColumn<ConsumedFood, String> calCol;
+    private TableColumn<DataLog, String> calCol;
 
     @FXML
-    private TableColumn<ConsumedFood, String> fatCol;
+    private TableColumn<DataLog, String> fatCol;
 
     @FXML
-    private TableColumn<ConsumedFood, String> carbCol;
+    private TableColumn<DataLog, String> carbCol;
 
     @FXML
-    private TableColumn<ConsumedFood, String> protCol;
+    private TableColumn<DataLog, String> protCol;
 
     @FXML
-    private TableColumn<ConsumedFood, String> dateCol;
+    private TableColumn<DataLog, String> dateCol;
 
     private String username;
-    private FoodList logList;
+    private LogList logList;
 
     public void onClickButton(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmlfiles/secondary.fxml"));
@@ -51,18 +54,18 @@ public class LogController {
     }
 
 
-    public void initdata(FoodList log, String username){
+    public void initdata(LogList log, String username){
         this.username=username;
         this.logList = log;
 
         System.out.println(this.logList + " is the loglist.");
 
-        nameCol.setCellValueFactory(new PropertyValueFactory<ConsumedFood, String>("name"));
-        calCol.setCellValueFactory(new PropertyValueFactory<ConsumedFood, String>("calories"));
-        fatCol.setCellValueFactory(new PropertyValueFactory<ConsumedFood, String>("fat"));
-        protCol.setCellValueFactory(new PropertyValueFactory<ConsumedFood, String>("protein"));
-        carbCol.setCellValueFactory(new PropertyValueFactory<ConsumedFood, String>("carbo"));
-        dateCol.setCellValueFactory(new PropertyValueFactory<ConsumedFood, String>("date"));
+        nameCol.setCellValueFactory(new PropertyValueFactory<DataLog, String>("username"));
+        calCol.setCellValueFactory(new PropertyValueFactory<DataLog, String>("cal"));
+        fatCol.setCellValueFactory(new PropertyValueFactory<DataLog, String>("fat"));
+        protCol.setCellValueFactory(new PropertyValueFactory<DataLog, String>("prot"));
+        carbCol.setCellValueFactory(new PropertyValueFactory<DataLog, String>("carb"));
+        dateCol.setCellValueFactory(new PropertyValueFactory<DataLog, String>("date"));
 
         logTable.getItems().setAll(logList.getData());
     }
