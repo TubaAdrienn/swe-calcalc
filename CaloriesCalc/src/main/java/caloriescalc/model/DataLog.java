@@ -1,6 +1,7 @@
 package caloriescalc.model;
 
 import caloriescalc.util.DateAdapter;
+import caloriescalc.util.Rounder;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,20 +21,15 @@ import java.time.LocalDate;
 public class DataLog {
 
     @XmlJavaTypeAdapter(DateAdapter.class)
-    private LocalDate date;
+    private LocalDate date=LocalDate.now();
     private String username;
     private double cal;
     private double carb;
     private double fat;
     private double prot;
 
-    public DataLog(String username, LocalDate date){
+    public DataLog(String username){
         this.username=username;
-        this.cal=0;
-        this.carb=0;
-        this.fat=0;
-        this.prot=0;
-        this.date=date;
     }
 
     public void zeroValues(){
@@ -51,19 +47,19 @@ public class DataLog {
     }
 
     public void addToCal(double value){
-        this.cal+=value;
+        this.cal=(Rounder.roundOff(this.cal+=value));
     }
 
     public void addToCarb(double value){
-        this.carb+=value;
+        this.carb=(Rounder.roundOff(this.carb+=value));
     }
 
     public void addToFat(double value){
-        this.fat+=value;
+        this.fat=(Rounder.roundOff(this.fat+=value));
     }
 
     public void addToProt(double value){
-        this.prot+=value;
+        this.prot=(Rounder.roundOff(this.prot+=value));
     }
 
 }

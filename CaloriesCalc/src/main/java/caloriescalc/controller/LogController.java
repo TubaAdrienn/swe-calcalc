@@ -1,8 +1,6 @@
 package caloriescalc.controller;
 
 import caloriescalc.model.DataLog;
-import caloriescalc.model.Food;
-import caloriescalc.model.FoodList;
 import caloriescalc.model.LogList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,8 +12,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-
-import javax.xml.crypto.Data;
 import java.io.IOException;
 
 public class LogController {

@@ -20,10 +20,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.tinylog.Logger;
-
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -64,13 +62,14 @@ public class SecondaryController{
 
     private FoodList foodList=new FoodList();
     private LogList loglist;
-    private DataLog dataLog;
+    private DataLog dataLog=new DataLog();
     private String userName;
     private double currentCal=0, currentFat=0, currentProt=0, currentCarb=0;
 
     public void initdata(String userName){
         this.userName = userName;
-        Logger.debug("The username is {}", this.userName);
+        dataLog=new DataLog(userName);
+        Logger.debug("Username is: {}",dataLog.getUsername());
     }
 
     public void setImages(String male, String female){
@@ -93,7 +92,6 @@ public class SecondaryController{
         loadData("/data/food.xml", "/data/consumedfood.xml");
         List<String> lista=foodList.getData().stream().map(Food::getName).sorted().collect(Collectors.toList());
         foodBox.getItems().addAll(lista);
-        dataLog=new DataLog(userName, LocalDate.now());
     }
 
     public void setTextToBMI(String text, String color){
@@ -165,29 +163,27 @@ public class SecondaryController{
 
 
     public void saveValues(ActionEvent actionEvent) throws Exception {
-       /* if(!dataLog.isEverythingZero()){
-            Food foodToLog = new Food(userName, Rounder.roundOff(currentCal),
-                    Rounder.roundOff(currentFat), Rounder.roundOff(currentCarb),
-                    Rounder.roundOff(currentProt));
-            if(loggedFoodList.getData()==null){
-                List<Food> lista=List.of(foodToLog);
-                loggedFoodList.setData(lista);
-                System.out.println(loggedFoodList.getData());
-                Database.saveLog(loggedFoodList);
+        if(!dataLog.isEverythingZero()){
+            if(loglist.getData()==null){
+                dataLog.setUsername(userName);
+                List<DataLog> lista=List.of(dataLog);
+                loglist.setData(lista);
+                Logger.debug("Data to log: {}", loglist.getData());
+                Database.saveXML(loglist);
             }
             else {
-                loggedFoodList.getData().add(foodToLog);
-                System.out.println(loggedFoodList.getData());
-                Database.saveLog(loggedFoodList );
+                dataLog.setUsername(userName);
+                loglist.getData().add(dataLog);
+                Logger.debug("Data to log: {}", loglist.getData());
+                Database.saveXML(loglist);
             }
             loadLogScene(actionEvent);
-            currentCal=currentFat=currentProt=currentCarb=0;
 
         }
         else{
             System.out.println("Nincs mit menteni.");
         }
-*/
+
     }
 
     public void goToLogs(ActionEvent actionEvent) throws IOException {
