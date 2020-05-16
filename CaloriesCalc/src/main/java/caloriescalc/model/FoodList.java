@@ -11,7 +11,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 import java.util.Optional;
 
-
+/**
+ * Class representing list of {@link FoodItem}
+ */
 @XmlRootElement(name="food")
 @XmlAccessorType(XmlAccessType.FIELD)
 @AllArgsConstructor
@@ -19,10 +21,19 @@ import java.util.Optional;
 @Data
 public class FoodList {
 
-    private List<Food> data;
+    /**
+     * List of {@link FoodItem}
+     */
+    private List<FoodItem> data;
 
-    public Food getFoodItemByName(String nameOfFood){
-        Optional<Food> consumedFood=data.stream().filter(name->name.getName()==nameOfFood).findAny();
+    /**
+     * Searches the list by given name
+     *
+     * @param nameOfFood name to be searched
+     * @return the found {@link FoodItem} item
+     */
+    public FoodItem getFoodItemByName(String nameOfFood){
+        Optional<FoodItem> consumedFood=data.stream().filter(name->name.getName()==nameOfFood).findAny();
         Logger.debug((consumedFood.get()));
         return consumedFood.get();
     }

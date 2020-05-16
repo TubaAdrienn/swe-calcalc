@@ -1,7 +1,7 @@
 package caloriescalc.controller;
 
-import caloriescalc.model.DataLog;
-import caloriescalc.model.LogList;
+import caloriescalc.model.Journal;
+import caloriescalc.model.JournalItem;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,58 +12,61 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import org.tinylog.Logger;
 import java.io.IOException;
+
 
 public class LogController {
 
     @FXML
-    private TableView<DataLog> logTable;
+    private TableView<JournalItem> logTable;
 
     @FXML
-    private TableColumn<DataLog, String> nameCol;
+    private TableColumn<JournalItem, String> nameCol;
 
     @FXML
-    private TableColumn<DataLog, String> calCol;
+    private TableColumn<JournalItem, String> calCol;
 
     @FXML
-    private TableColumn<DataLog, String> fatCol;
+    private TableColumn<JournalItem, String> fatCol;
 
     @FXML
-    private TableColumn<DataLog, String> carbCol;
+    private TableColumn<JournalItem, String> carbCol;
 
     @FXML
-    private TableColumn<DataLog, String> protCol;
+    private TableColumn<JournalItem, String> protCol;
 
     @FXML
-    private TableColumn<DataLog, String> dateCol;
+    private TableColumn<JournalItem, String> dateCol;
 
     private String username;
-    private LogList logList;
 
-    public void onClickButton(ActionEvent actionEvent) throws IOException {
+    private Journal journal;
+
+    public void goBackToCalculator(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmlfiles/secondary.fxml"));
         Parent root = fxmlLoader.load();
-        fxmlLoader.<SecondaryController>getController().initdata(username);
+        fxmlLoader.<CalculatorController>getController().initdata(username);
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
     }
 
-
-    public void initdata(LogList log, String username){
+    public void initdata(Journal log, String username){
         this.username=username;
-        this.logList = log;
+        this.journal = log;
+        Logger.debug((this.journal + " is the loglist."));
+        setCells();
+    }
 
-        System.out.println(this.logList + " is the loglist.");
-
-        nameCol.setCellValueFactory(new PropertyValueFactory<DataLog, String>("username"));
-        calCol.setCellValueFactory(new PropertyValueFactory<DataLog, String>("cal"));
-        fatCol.setCellValueFactory(new PropertyValueFactory<DataLog, String>("fat"));
-        protCol.setCellValueFactory(new PropertyValueFactory<DataLog, String>("prot"));
-        carbCol.setCellValueFactory(new PropertyValueFactory<DataLog, String>("carb"));
-        dateCol.setCellValueFactory(new PropertyValueFactory<DataLog, String>("date"));
-
-        logTable.getItems().setAll(logList.getData());
+    public void setCells(){
+        nameCol.setCellValueFactory(new PropertyValueFactory<JournalItem, String>("username"));
+        calCol.setCellValueFactory(new PropertyValueFactory<JournalItem, String>("cal"));
+        fatCol.setCellValueFactory(new PropertyValueFactory<JournalItem, String>("fat"));
+        protCol.setCellValueFactory(new PropertyValueFactory<JournalItem, String>("prot"));
+        carbCol.setCellValueFactory(new PropertyValueFactory<JournalItem, String>("carb"));
+        dateCol.setCellValueFactory(new PropertyValueFactory<JournalItem, String>("date"));
+        logTable.getItems().setAll(journal.getData());
     }
 
 }

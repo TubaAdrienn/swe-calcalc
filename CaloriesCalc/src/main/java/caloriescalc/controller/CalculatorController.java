@@ -1,10 +1,10 @@
 package caloriescalc.controller;
 
 import caloriescalc.dao.Database;
-import caloriescalc.model.DataLog;
-import caloriescalc.model.Food;
+import caloriescalc.model.JournalItem;
+import caloriescalc.model.FoodItem;
 import caloriescalc.model.FoodList;
-import caloriescalc.model.LogList;
+import caloriescalc.model.Journal;
 import caloriescalc.util.BmiCalc;
 import caloriescalc.util.Rounder;
 import javafx.event.ActionEvent;
@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SecondaryController{
+public class CalculatorController {
 
     @FXML
     private TextField weightField;
@@ -61,40 +61,59 @@ public class SecondaryController{
     private ImageView femaleImg;
 
     private FoodList foodList=new FoodList();
-    private LogList loglist;
-    private DataLog dataLog=new DataLog();
+    private JournalItem journalItem =new JournalItem();
     private String userName;
-    private double currentCal=0, currentFat=0, currentProt=0, currentCarb=0;
-
-    public void initdata(String userName){
-        this.userName = userName;
-        dataLog=new DataLog(userName);
-        Logger.debug("Username is: {}",dataLog.getUsername());
-    }
-
-    public void setImages(String male, String female){
-        maleImg.setImage(new Image(getClass().getResource(male).toExternalForm()));
-        femaleImg.setImage(new Image(getClass().getResource(female).toExternalForm()));
-        Logger.info("Images set.");
-    }
-
-    public void loadData(String foodData, String loggedData) throws JAXBException {
-        foodList = (FoodList) Database.loadXML(FoodList.class,foodData );
-        Logger.info("Food data loaded.");
-        loglist = (LogList) Database.loadXML(LogList.class,loggedData);
-        Logger.info("Logged data loaded");
-        Logger.debug("Logged data {}", loglist);
-    }
+    private Journal loglist;
 
     @FXML
     public void  initialize() throws Exception {
         setImages("/images/male.png", "/images/female.png" );
         loadData("/data/food.xml", "/data/consumedfood.xml");
-        List<String> lista=foodList.getData().stream().map(Food::getName).sorted().collect(Collectors.toList());
+        List<String> lista=foodList.getData().stream()
+                .map(FoodItem::getName).sorted().collect(Collectors.toList());
         foodBox.getItems().addAll(lista);
     }
 
-    public void setTextToBMI(String text, String color){
+    public void initdata(String userName){
+        this.userName = userName;
+        journalItem =new JournalItem(userName);
+        Logger.debug("Username is: {}", journalItem.getUsername());
+    }
+
+    /**
+     * Sets the images of the male and female value tables
+     *
+     * @param male male image path
+     * @param female female image path
+     */
+    private void setImages(String male, String female){
+        maleImg.setImage(new Image(getClass().getResource(male).toExternalForm()));
+        femaleImg.setImage(new Image(getClass().getResource(female).toExternalForm()));
+        Logger.info("Images set.");
+    }
+
+    /**
+     * Loads the data that contains the food items and the journal
+     *
+     * @param foodData path to food items
+     * @param loggedData path to journal
+     * @throws JAXBException if a problem occurs during the loading
+     */
+    private void loadData(String foodData, String loggedData) throws JAXBException {
+        foodList = (FoodList) Database.loadXML(FoodList.class,foodData );
+        Logger.info("Food data loaded.");
+        loglist = (Journal) Database.loadXML(Journal.class,loggedData);
+        Logger.info("Logged data loaded");
+        Logger.debug("Logged data {}", loglist);
+    }
+
+    /**
+     * Sets text to BMI {@link Label}
+     *
+     * @param text the text to be set
+     * @param color the color of the text
+     */
+    private void setTextToBMI(String text, String color){
         bmiValue.setText(text);
         bmiValue.setStyle("-fx-text-fill: "+color+";");
     }
@@ -122,34 +141,43 @@ public class SecondaryController{
     }
 
     public void zeroValues(ActionEvent actionEvent) {
-        dataLog.zeroValues();
-        setNutrients();
+        journalItem.zeroValues();
+        updateNutrients();
     }
 
-    public void setNutrients(){
-        allCaloriesText.setText(Double.toString(Rounder.roundOff(dataLog.getCal())));
-        allCarbText.setText(Double.toString(Rounder.roundOff(dataLog.getCarb())));
-        allFatText.setText(Double.toString(Rounder.roundOff(dataLog.getFat())));
-        allProteinText.setText(Double.toString(Rounder.roundOff(dataLog.getProt())));
+    /**
+     * Updates the texts representing the nutrients
+     */
+    private void updateNutrients(){
+        allCaloriesText.setText(Double.toString(Rounder.roundOff(journalItem.getCal())));
+        allCarbText.setText(Double.toString(Rounder.roundOff(journalItem.getCarb())));
+        allFatText.setText(Double.toString(Rounder.roundOff(journalItem.getFat())));
+        allProteinText.setText(Double.toString(Rounder.roundOff(journalItem.getProt())));
         Logger.info("New values set.");
     }
 
-    public void addPortionToCurrent(Food foodItem, double gramsInput){
-        dataLog.addToCal(foodItem.getCalPortion(gramsInput));
-        dataLog.addToCarb(foodItem.getCarboPortion(gramsInput));
-        dataLog.addToFat(foodItem.getFatPortion(gramsInput));
-        dataLog.addToProt(foodItem.getProteinPortion(gramsInput));
+    /**
+     * Adds calculatied portions of the given {@link FoodItem}'s attributes to the {@link JournalItem}'s attributes.
+     *
+     * @param foodItem the food to calculate portions of
+     * @param gramsInput amount of food
+     */
+    private void addPortionToCurrent(FoodItem foodItem, double gramsInput){
+        journalItem.addToCal(foodItem.getCalPortion(gramsInput));
+        journalItem.addToCarb(foodItem.getCarboPortion(gramsInput));
+        journalItem.addToFat(foodItem.getFatPortion(gramsInput));
+        journalItem.addToProt(foodItem.getProteinPortion(gramsInput));
     }
 
-    public void setNewValues() throws Exception{
+    private void setNewValues(){
         if(foodBox.getValue()!=null)
             try {
                 double gramsInput = Double.parseDouble(gramsField.getText());
                 if (gramsInput >= 0) {
                     String chosenFood = (String) foodBox.getValue();
-                    Food foodItem = foodList.getFoodItemByName(chosenFood);
+                    FoodItem foodItem = foodList.getFoodItemByName(chosenFood);
                     addPortionToCurrent(foodItem, gramsInput);
-                    setNutrients();
+                    updateNutrients();
                 }
             } catch (Exception e){
                 Logger.error("Value is not right. Try again.");
@@ -158,24 +186,22 @@ public class SecondaryController{
 
     public void addPortion(ActionEvent setValues) throws Exception{
         setNewValues();
-        setNutrients();
     }
 
-
     public void saveValues(ActionEvent actionEvent) throws Exception {
-        if(!dataLog.isEverythingZero()){
+        if(!journalItem.isEverythingZero()){
             if(loglist.getData()==null){
-                dataLog.setUsername(userName);
-                List<DataLog> lista=List.of(dataLog);
+                journalItem.setUsername(userName);
+                List<JournalItem> lista=List.of(journalItem);
                 loglist.setData(lista);
                 Logger.debug("Data to log: {}", loglist.getData());
-                Database.saveXML(loglist);
+                Database.saveXML(loglist, "/data/consumedfood.xml");
             }
             else {
-                dataLog.setUsername(userName);
-                loglist.getData().add(dataLog);
+                journalItem.setUsername(userName);
+                loglist.getData().add(journalItem);
                 Logger.debug("Data to log: {}", loglist.getData());
-                Database.saveXML(loglist);
+                Database.saveXML(loglist, "/data/consumedfood.xml");
             }
             loadLogScene(actionEvent);
 
@@ -190,7 +216,7 @@ public class SecondaryController{
         loadLogScene(actionEvent);
     }
 
-    public void loadLogScene(ActionEvent actionEvent) throws IOException{
+    private void loadLogScene(ActionEvent actionEvent) throws IOException{
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmlfiles/useraddedlog.fxml"));
         Parent root = fxmlLoader.load();
         fxmlLoader.<LogController>getController().initdata(loglist, userName);

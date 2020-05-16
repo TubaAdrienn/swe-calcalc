@@ -9,15 +9,26 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.net.URL;
 
+/**
+ * Class to save and load files from XML using JAXB
+ */
 public class Database {
 
-    public static void saveXML(Object o) throws Exception {
+
+    /**
+     * Serializes an object to XML. The output document is written in UTF-8 encoding.
+     *
+     * @param o is the object to serialize
+     * @param path the file path to serialize to
+     * @throws Exception if problem occurs during serialization
+     */
+    public static void saveXML(Object o, String path) throws Exception {
         try {
             JAXBContext context = JAXBContext.newInstance(o.getClass());
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
             marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
-            URL url = Database.class.getResource("/data/consumedfood.xml");
+            URL url = Database.class.getResource(path);
           //  System.out.println(url);
             File file = new File(url.toURI());
            // System.out.println(file);
@@ -29,6 +40,13 @@ public class Database {
         }
     }
 
+    /**
+     * Deserializes an object from XML.
+     * @param clazz the class of the object
+     * @param file the file path to deserialize from
+     * @return the resulting object
+     * @throws JAXBException if problem occurs during deserialization
+     */
     public static <T> T loadXML(Class<T> clazz, String file) throws JAXBException {
         try {
             JAXBContext context = JAXBContext.newInstance(clazz);

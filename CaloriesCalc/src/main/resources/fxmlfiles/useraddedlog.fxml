@@ -9,7 +9,7 @@
    <children>
       <VBox prefHeight="550.0" prefWidth="800.0">
          <children>
-            <Button fx:id="backButton" mnemonicParsing="false" onAction="#onClickButton" prefHeight="25.0" prefWidth="104.0" style="-fx-background-color: lightgreen; -fx-font-weight: bold;" text="VISSZA">
+            <Button fx:id="backButton" mnemonicParsing="false" onAction="#goBackToCalculator" prefHeight="25.0" prefWidth="104.0" style="-fx-background-color: lightgreen; -fx-font-weight: bold;" text="VISSZA">
                <VBox.margin>
                   <Insets bottom="15.0" left="15.0" top="15.0" />
                </VBox.margin>

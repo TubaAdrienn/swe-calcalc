@@ -13,7 +13,7 @@ import org.tinylog.Logger;
 
 import java.io.IOException;
 
-public class PrimaryController {
+public class LaunchController {
 
     @FXML
     private TextField nameText;
@@ -29,7 +29,7 @@ public class PrimaryController {
         } else {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmlfiles/secondary.fxml"));
             Parent root = fxmlLoader.load();
-            fxmlLoader.<SecondaryController>getController().initdata(nameText.getText());
+            fxmlLoader.<CalculatorController>getController().initdata(nameText.getText());
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();

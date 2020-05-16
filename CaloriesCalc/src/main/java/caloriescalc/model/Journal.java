@@ -4,19 +4,25 @@ package caloriescalc.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
+
+/**
+ * Class representing a journal of nutritional intake
+ */
 @XmlRootElement(name="logs")
 @XmlAccessorType(XmlAccessType.FIELD)
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class LogList {
+public class Journal {
 
-    private List<DataLog> data;
+    /**
+     * List of {@link JournalItem}
+     */
+    private List<JournalItem> data;
 
 }
