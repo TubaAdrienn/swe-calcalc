@@ -1,5 +1,6 @@
 package caloriescalc.model;
 
+import caloriescalc.util.CalculationHelper;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -41,7 +42,6 @@ public class FoodItem {
      */
     private double protein;
 
-
     /**
      * Calculates the calorie intake by the given amount of consumption
      *
@@ -49,7 +49,7 @@ public class FoodItem {
      * @return the calculated calorie intake
      */
     public double getCalPortion(double grams){
-        return (grams/100)*this.calories;
+        return CalculationHelper.roundOff((grams/100)*this.calories);
     }
 
     /**
@@ -59,7 +59,7 @@ public class FoodItem {
      * @return the calculated fat intake
      */
     public double getFatPortion(double grams){
-        return (grams/100)*this.fat;
+        return CalculationHelper.roundOff((grams/100)*this.fat);
     }
 
     /**
@@ -69,7 +69,7 @@ public class FoodItem {
      * @return the calculated carbohydrate intake
      */
     public double getCarboPortion(double grams){
-        return (grams/100)*this.carbo;
+        return CalculationHelper.roundOff((grams/100)*this.carbo);
     }
 
     /**
@@ -79,7 +79,7 @@ public class FoodItem {
      * @return the calculated protein intake
      */
     public double getProteinPortion(double grams){
-        return (grams/100)*this.protein;
+        return CalculationHelper.roundOff((grams/100)*this.protein);
     }
 
     public String getName(){

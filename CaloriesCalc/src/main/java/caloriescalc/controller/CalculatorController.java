@@ -22,6 +22,7 @@ import org.tinylog.Logger;
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class CalculatorController {
@@ -60,14 +61,14 @@ public class CalculatorController {
     private ImageView femaleImg;
 
     private FoodList foodList=new FoodList();
-    private UserData userData =new UserData();
+    private UserData userData;
     private String userName;
     private Journal loglist;
 
     @FXML
     public void  initialize() throws Exception {
         setImages("/images/male.png", "/images/female.png" );
-        loadData("/data/food.xml", "/data/consumedfood.xml");
+        loadData("/data/food.xml", "/data/logdata.xml");
         List<String> lista=foodList.getData().stream()
                 .map(FoodItem::getName).sorted().collect(Collectors.toList());
         foodBox.getItems().addAll(lista);
@@ -204,19 +205,17 @@ public class CalculatorController {
     public void saveValues(ActionEvent actionEvent) throws Exception {
         if(!userData.isEverythingZero()){
             if(loglist.getData()==null){
-                userData.setUsername(userName);
                 setBMI();
                 List<UserData> lista=List.of(userData);
                 loglist.setData(lista);
                 Logger.debug("Data to log: {}", loglist.getData());
-                Database.saveXML(loglist, "/data/consumedfood.xml");
+                Database.saveXML(loglist, "/data/logdata.xml");
             }
             else {
-                userData.setUsername(userName);
                 setBMI();
                 loglist.getData().add(userData);
                 Logger.debug("Data to log: {}", loglist.getData());
-                Database.saveXML(loglist, "/data/consumedfood.xml");
+                Database.saveXML(loglist, "/data/logdata.xml");
             }
             loadLogScene(actionEvent);
 

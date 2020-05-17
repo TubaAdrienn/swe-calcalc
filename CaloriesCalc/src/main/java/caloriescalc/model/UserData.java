@@ -26,7 +26,7 @@ public class UserData {
      * Date of the logging
      */
     @XmlJavaTypeAdapter(DateAdapter.class)
-    private LocalDate date=LocalDate.now();
+    private LocalDate date;
 
     /**
      * Name of the user
@@ -59,6 +59,7 @@ public class UserData {
     private String bmi;
 
     public UserData(String username){
+        this.date=LocalDate.now();
         this.username=username;
     }
 
