@@ -27,7 +27,7 @@ public class LaunchController {
             errorText.setText("Give me a username!");
             Logger.error("Empty username.");
         } else {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmlfiles/secondary.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmlfiles/mainpage.fxml"));
             Parent root = fxmlLoader.load();
             fxmlLoader.<CalculatorController>getController().initdata(nameText.getText());
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();

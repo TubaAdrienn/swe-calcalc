@@ -21,8 +21,8 @@ import java.util.List;
 public class Journal {
 
     /**
-     * List of {@link JournalItem}
+     * List of {@link UserData}
      */
-    private List<JournalItem> data;
+    private List<UserData> data;
 
 }

@@ -1,12 +1,11 @@
 package caloriescalc.controller;
 
 import caloriescalc.dao.Database;
-import caloriescalc.model.JournalItem;
+import caloriescalc.model.UserData;
 import caloriescalc.model.FoodItem;
 import caloriescalc.model.FoodList;
 import caloriescalc.model.Journal;
-import caloriescalc.util.BmiCalc;
-import caloriescalc.util.Rounder;
+import caloriescalc.util.CalculationHelper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -61,7 +60,7 @@ public class CalculatorController {
     private ImageView femaleImg;
 
     private FoodList foodList=new FoodList();
-    private JournalItem journalItem =new JournalItem();
+    private UserData userData =new UserData();
     private String userName;
     private Journal loglist;
 
@@ -76,8 +75,8 @@ public class CalculatorController {
 
     public void initdata(String userName){
         this.userName = userName;
-        journalItem =new JournalItem(userName);
-        Logger.debug("Username is: {}", journalItem.getUsername());
+        userData =new UserData(userName);
+        Logger.debug("Username is: {}", userData.getUsername());
     }
 
     /**
@@ -127,7 +126,7 @@ public class CalculatorController {
                 int weight = Integer.parseInt(weightField.getText());
                 int height = Integer.parseInt(heightField.getText());
                 if (!(weight > 595 || height> 272 || weight<25 || height<50)) {
-                    setTextToBMI(Double.toString(BmiCalc.bmiCalculation(weight,height)), "black");
+                    setTextToBMI(Double.toString(CalculationHelper.bmiCalculation(weight,height)), "black");
                 } else {
                     setTextToBMI("Irreális érték.", "red");
                     Logger.error("Irreal value. Good one required.");
@@ -141,7 +140,7 @@ public class CalculatorController {
     }
 
     public void zeroValues(ActionEvent actionEvent) {
-        journalItem.zeroValues();
+        userData.zeroValues();
         updateNutrients();
     }
 
@@ -149,24 +148,28 @@ public class CalculatorController {
      * Updates the texts representing the nutrients
      */
     private void updateNutrients(){
-        allCaloriesText.setText(Double.toString(Rounder.roundOff(journalItem.getCal())));
-        allCarbText.setText(Double.toString(Rounder.roundOff(journalItem.getCarb())));
-        allFatText.setText(Double.toString(Rounder.roundOff(journalItem.getFat())));
-        allProteinText.setText(Double.toString(Rounder.roundOff(journalItem.getProt())));
-        Logger.info("New values set.");
+      /*  allCaloriesText.setText(Double.toString(CalculationHelper.roundOff(journalItem.getCal())));
+        allCarbText.setText(Double.toString(CalculationHelper.roundOff(journalItem.getCarb())));
+        allFatText.setText(Double.toString(CalculationHelper.roundOff(journalItem.getFat())));
+        allProteinText.setText(Double.toString(CalculationHelper.roundOff(journalItem.getProt())));
+        Logger.info("New values set.");*/
+        allCaloriesText.setText(Double.toString(userData.getCal()));
+        allCarbText.setText(Double.toString(userData.getCarb()));
+        allFatText.setText(Double.toString(userData.getFat()));
+        allProteinText.setText(Double.toString(userData.getProt()));
     }
 
     /**
-     * Adds calculatied portions of the given {@link FoodItem}'s attributes to the {@link JournalItem}'s attributes.
+     * Adds calculatied portions of the given {@link FoodItem}'s attributes to the {@link UserData}'s attributes.
      *
      * @param foodItem the food to calculate portions of
      * @param gramsInput amount of food
      */
     private void addPortionToCurrent(FoodItem foodItem, double gramsInput){
-        journalItem.addToCal(foodItem.getCalPortion(gramsInput));
-        journalItem.addToCarb(foodItem.getCarboPortion(gramsInput));
-        journalItem.addToFat(foodItem.getFatPortion(gramsInput));
-        journalItem.addToProt(foodItem.getProteinPortion(gramsInput));
+        userData.addToCal(foodItem.getCalPortion(gramsInput));
+        userData.addToCarb(foodItem.getCarboPortion(gramsInput));
+        userData.addToFat(foodItem.getFatPortion(gramsInput));
+        userData.addToProt(foodItem.getProteinPortion(gramsInput));
     }
 
     private void setNewValues(){
@@ -188,18 +191,30 @@ public class CalculatorController {
         setNewValues();
     }
 
+    public void setBMI(){
+        if (bmiValue.getText().compareTo("0")!=0){
+            userData.setBmi(bmiValue.getText());
+            Logger.debug("BMI value is: {}", bmiValue.getText());
+        }
+        else{
+            userData.setBmi("Nincs adat.");
+        }
+    }
+
     public void saveValues(ActionEvent actionEvent) throws Exception {
-        if(!journalItem.isEverythingZero()){
+        if(!userData.isEverythingZero()){
             if(loglist.getData()==null){
-                journalItem.setUsername(userName);
-                List<JournalItem> lista=List.of(journalItem);
+                userData.setUsername(userName);
+                setBMI();
+                List<UserData> lista=List.of(userData);
                 loglist.setData(lista);
                 Logger.debug("Data to log: {}", loglist.getData());
                 Database.saveXML(loglist, "/data/consumedfood.xml");
             }
             else {
-                journalItem.setUsername(userName);
-                loglist.getData().add(journalItem);
+                userData.setUsername(userName);
+                setBMI();
+                loglist.getData().add(userData);
                 Logger.debug("Data to log: {}", loglist.getData());
                 Database.saveXML(loglist, "/data/consumedfood.xml");
             }
@@ -217,7 +232,7 @@ public class CalculatorController {
     }
 
     private void loadLogScene(ActionEvent actionEvent) throws IOException{
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmlfiles/useraddedlog.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmlfiles/logpage.fxml"));
         Parent root = fxmlLoader.load();
         fxmlLoader.<LogController>getController().initdata(loglist, userName);
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();

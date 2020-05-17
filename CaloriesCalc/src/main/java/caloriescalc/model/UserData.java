@@ -1,7 +1,7 @@
 package caloriescalc.model;
 
+import caloriescalc.util.CalculationHelper;
 import caloriescalc.util.DateAdapter;
-import caloriescalc.util.Rounder;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,14 +13,14 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 
 /**
- * Class representing an item of {@link Journal}
+ * Class representing user of {@link Journal}
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = {"date", "username", "cal", "carb", "fat", "prot"})
+@XmlType(propOrder = {"date", "username", "cal", "carb", "fat", "prot", "bmi"})
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class JournalItem {
+public class UserData {
 
     /**
      * Date of the logging
@@ -53,7 +53,12 @@ public class JournalItem {
      */
     private double prot;
 
-    public JournalItem(String username){
+    /**
+     * BMI number of the user
+     */
+    private String bmi;
+
+    public UserData(String username){
         this.username=username;
     }
 
@@ -79,35 +84,35 @@ public class JournalItem {
     }
 
     /**
-     * Adds a rounded off value to the {@link JournalItem}'s cal attribute
+     * Adds a rounded off value to the {@link UserData}'s cal attribute
      * @param value value to be added
      */
     public void addToCal(double value){
-        this.cal=(Rounder.roundOff(this.cal+=value));
+        this.cal=(CalculationHelper.roundOff(this.cal+=value));
     }
 
     /**
-     * Adds a rounded off value to the {@link JournalItem}'s carb attribute
+     * Adds a rounded off value to the {@link UserData}'s carb attribute
      * @param value value to be added
      */
     public void addToCarb(double value){
-        this.carb=(Rounder.roundOff(this.carb+=value));
+        this.carb=(CalculationHelper.roundOff(this.carb+=value));
     }
 
     /**
-     * Adds a rounded off value to the {@link JournalItem}'s fat attribute
+     * Adds a rounded off value to the {@link UserData}'s fat attribute
      * @param value value to be added
      */
     public void addToFat(double value){
-        this.fat=(Rounder.roundOff(this.fat+=value));
+        this.fat=(CalculationHelper.roundOff(this.fat+=value));
     }
 
     /**
-     * Adds a rounded off value to the {@link JournalItem}'s protein attribute
+     * Adds a rounded off value to the {@link UserData}'s protein attribute
      * @param value value to be added
      */
     public void addToProt(double value){
-        this.prot=(Rounder.roundOff(this.prot+=value));
+        this.prot=(CalculationHelper.roundOff(this.prot+=value));
     }
 
 }

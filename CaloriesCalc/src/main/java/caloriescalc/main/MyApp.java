@@ -10,7 +10,7 @@ public class MyApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("/fxmlfiles/primary.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxmlfiles/launch.fxml"));
         primaryStage.setTitle("Calorie Calculator");
         primaryStage.setResizable(false);
         primaryStage.setScene(new Scene(root));

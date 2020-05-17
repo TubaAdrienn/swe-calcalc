@@ -16,12 +16,13 @@
             </Button>
             <TableView fx:id="logTable" editable="false" prefHeight="546.0" prefWidth="800.0" style="-fx-background-color: lightgrey; -fx-border-color: black;">
               <columns>
-                <TableColumn fx:id="nameCol" editable="false" prefWidth="133.0" sortable="false" style="-fx-background-color: lightgreen; -fx-border-color: black;" text="Név" />
-                <TableColumn fx:id="calCol" prefWidth="133.0" style="-fx-background-color: lightgreen; -fx-border-color: black;" text="Kalória" />
-                  <TableColumn fx:id="fatCol" prefWidth="133.0" style="-fx-background-color: lightgreen; -fx-border-color: black;" text="Zsír" />
-                  <TableColumn fx:id="carbCol" prefWidth="133.0" style="-fx-background-color: lightgreen; -fx-border-color: black;" text="Szénhidrát" />
-                  <TableColumn fx:id="protCol" prefWidth="133.0" style="-fx-background-color: lightgreen; -fx-border-color: black;" text="Fehérje" />
-                  <TableColumn fx:id="dateCol" prefWidth="133.0" style="-fx-background-color: lightgreen; -fx-border-color: black;" text="Nap" />
+                <TableColumn fx:id="nameCol" editable="false" prefWidth="114.0" sortable="false" style="-fx-background-color: lightgreen; -fx-border-color: black;" text="Név" />
+                <TableColumn fx:id="calCol" prefWidth="114.0" style="-fx-background-color: lightgreen; -fx-border-color: black;" text="Kalória" />
+                  <TableColumn fx:id="fatCol" prefWidth="114.0" style="-fx-background-color: lightgreen; -fx-border-color: black;" text="Zsír" />
+                  <TableColumn fx:id="carbCol" prefWidth="114.0" style="-fx-background-color: lightgreen; -fx-border-color: black;" text="Szénhidrát" />
+                  <TableColumn fx:id="protCol" prefWidth="114.0" style="-fx-background-color: lightgreen; -fx-border-color: black;" text="Fehérje" />
+                  <TableColumn fx:id="BMICol" prefWidth="114.0" style="-fx-background-color: lightgreen; -fx-border-color: black;" text="BMI" />
+                  <TableColumn fx:id="dateCol" prefWidth="114.0" style="-fx-background-color: lightgreen; -fx-border-color: black;" text="Nap" />
               </columns>
                <effect>
                   <DropShadow />
