@@ -99,7 +99,7 @@ public class CalculatorController {
      * @param loggedData path to journal
      * @throws JAXBException if a problem occurs during the loading
      */
-    private void loadData(String foodData, String loggedData) throws JAXBException {
+    private void loadData(String foodData, String loggedData) throws Exception {
         foodList = (FoodList) Database.loadXML(FoodList.class,foodData );
         Logger.info("Food data loaded.");
         loglist = (Journal) Database.loadXML(Journal.class,loggedData);
