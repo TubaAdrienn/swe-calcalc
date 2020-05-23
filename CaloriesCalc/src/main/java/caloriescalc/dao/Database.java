@@ -4,8 +4,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import java.io.*;
-import java.net.URL;
+import java.io.File;
 
 /**
  * Class to save and load files from XML using JAXB
@@ -26,8 +25,9 @@ public class Database {
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
             marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
-            URL url = Database.class.getResource(path);
-            File file = new File(url.toURI());
+            //URL url = Database.class.getResourceAsStream(path);
+            //File file = new File(url.toURI());
+            File file=new File(String.valueOf(Database.class.getResourceAsStream(path)));
             marshaller.marshal(o, file);
         } catch(JAXBException e) {
             throw e;
@@ -45,7 +45,6 @@ public class Database {
         try {
             JAXBContext context = JAXBContext.newInstance(clazz);
             Unmarshaller unmarshaller = context.createUnmarshaller();
-            System.out.println((Database.class.getResource(file)));
             return (T) unmarshaller.unmarshal(Database.class.getResource(file));
         } catch(Exception e) {
             throw e;
