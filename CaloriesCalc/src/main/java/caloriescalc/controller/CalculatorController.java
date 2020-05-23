@@ -22,7 +22,6 @@ import org.tinylog.Logger;
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class CalculatorController {
@@ -149,11 +148,6 @@ public class CalculatorController {
      * Updates the texts representing the nutrients
      */
     private void updateNutrients(){
-      /*  allCaloriesText.setText(Double.toString(CalculationHelper.roundOff(journalItem.getCal())));
-        allCarbText.setText(Double.toString(CalculationHelper.roundOff(journalItem.getCarb())));
-        allFatText.setText(Double.toString(CalculationHelper.roundOff(journalItem.getFat())));
-        allProteinText.setText(Double.toString(CalculationHelper.roundOff(journalItem.getProt())));
-        Logger.info("New values set.");*/
         allCaloriesText.setText(Double.toString(userData.getCal()));
         allCarbText.setText(Double.toString(userData.getCarb()));
         allFatText.setText(Double.toString(userData.getFat()));
@@ -209,13 +203,13 @@ public class CalculatorController {
                 List<UserData> lista=List.of(userData);
                 loglist.setData(lista);
                 Logger.debug("Data to log: {}", loglist.getData());
-                Database.saveXML(loglist, "/data/logdata.xml");
+                Database.saveXML(loglist);
             }
             else {
                 setBMI();
                 loglist.getData().add(userData);
                 Logger.debug("Data to log: {}", loglist.getData());
-                Database.saveXML(loglist, "/data/logdata.xml");
+                Database.saveXML(loglist);
             }
             loadLogScene(actionEvent);
 
