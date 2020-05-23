@@ -1,11 +1,13 @@
 package caloriescalc.controller;
 
-import caloriescalc.dao.Database;
-import caloriescalc.model.UserData;
+import caloriescalc.dao.DatabaseXML;
+import caloriescalc.dao.JournalDao;
 import caloriescalc.model.FoodItem;
 import caloriescalc.model.FoodList;
 import caloriescalc.model.Journal;
+import caloriescalc.model.UserData;
 import caloriescalc.util.CalculationHelper;
+import com.mysql.cj.log.Log;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,12 +21,16 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.tinylog.Logger;
+
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class CalculatorController {
+
+    private JournalDao journal;
 
     @FXML
     private TextField weightField;
@@ -62,12 +68,12 @@ public class CalculatorController {
     private FoodList foodList=new FoodList();
     private UserData userData;
     private String userName;
-    private Journal loglist;
 
     @FXML
     public void  initialize() throws Exception {
+        journal = JournalDao.getInstance();
         setImages("/images/male.png", "/images/female.png" );
-        loadData("/data/food.xml", "/data/logdata.xml");
+        loadData();
         List<String> lista=foodList.getData().stream()
                 .map(FoodItem::getName).sorted().collect(Collectors.toList());
         foodBox.getItems().addAll(lista);
@@ -94,16 +100,11 @@ public class CalculatorController {
     /**
      * Loads the data that contains the food items and the journal
      *
-     * @param foodData path to food items
-     * @param loggedData path to journal
      * @throws JAXBException if a problem occurs during the loading
      */
-    private void loadData(String foodData, String loggedData) throws Exception {
-        foodList = (FoodList) Database.loadXML(FoodList.class,foodData );
+    private void loadData() throws Exception {
+        foodList = DatabaseXML.loadFood();
         Logger.info("Food data loaded.");
-        loglist = (Journal) Database.loadXML(Journal.class,loggedData);
-        Logger.info("Logged data loaded");
-        Logger.debug("Logged data {}", loglist);
     }
 
     /**
@@ -198,24 +199,14 @@ public class CalculatorController {
 
     public void saveValues(ActionEvent actionEvent) throws Exception {
         if(!userData.isEverythingZero()){
-            if(loglist.getData()==null){
                 setBMI();
-                List<UserData> lista=List.of(userData);
-                loglist.setData(lista);
-                Logger.debug("Data to log: {}", loglist.getData());
-                Database.saveXML(loglist);
-            }
-            else {
-                setBMI();
-                loglist.getData().add(userData);
-                Logger.debug("Data to log: {}", loglist.getData());
-                Database.saveXML(loglist);
-            }
-            loadLogScene(actionEvent);
+                Logger.debug("Userdata: {}"+userData);
+                journal.persist(userData);
+                loadLogScene(actionEvent);
 
         }
         else{
-            System.out.println("Nincs mit menteni.");
+            Logger.debug("Nothing to save.");
         }
 
     }
@@ -227,7 +218,7 @@ public class CalculatorController {
     private void loadLogScene(ActionEvent actionEvent) throws IOException{
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmlfiles/logpage.fxml"));
         Parent root = fxmlLoader.load();
-        fxmlLoader.<LogController>getController().initdata(loglist, userName);
+        fxmlLoader.<LogController>getController().initdata(userName);
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();

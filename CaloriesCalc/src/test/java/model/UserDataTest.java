@@ -15,8 +15,8 @@ public class UserDataTest {
 
     @BeforeEach
     public void setUp(){
-        data1=new UserData(LocalDate.now(),"user1", 1003.5, 45.3,67.5,82.3,"20.1");
-        data2=new UserData(LocalDate.now(), "user2", 453.3, 24, 143.4, 34, "5");
+        data1=new UserData(10L,LocalDate.now(),"user1", 1003.5, 45.3,67.5,82.3,"20.1");
+        data2=new UserData(11L,LocalDate.now(), "user2", 453.3, 24, 143.4, 34, "5");
     }
 
     @AfterEach

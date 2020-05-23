@@ -1,31 +1,30 @@
 package caloriescalc.model;
 
 import caloriescalc.util.CalculationHelper;
-import caloriescalc.util.DateAdapter;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.time.LocalDate;
 
 /**
  * Class representing user of {@link Journal}
  */
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = {"date", "username", "cal", "carb", "fat", "prot", "bmi"})
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
+@Entity
 public class UserData {
 
-    /**
-     * Date of the logging
-     */
-    @XmlJavaTypeAdapter(DateAdapter.class)
+    @Id
+    @GeneratedValue
+    private Long id;
+
     private LocalDate date;
 
     /**
