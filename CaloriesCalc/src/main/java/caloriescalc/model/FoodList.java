@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
- * Class representing list of {@link FoodItem}
+ * Class representing list of {@link FoodItem}.
  */
 @XmlRootElement(name="food")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -22,7 +22,7 @@ import java.util.NoSuchElementException;
 public class FoodList {
 
     /**
-     * List of {@link FoodItem}
+     * List of {@link FoodItem}.
      */
     private List<FoodItem> data;
 
@@ -31,7 +31,7 @@ public class FoodList {
     }
 
     /**
-     * Searches the list by given name
+     * Searches the list by given name.
      *
      * @param nameOfFood name to be searched
      * @return the found {@link FoodItem} item

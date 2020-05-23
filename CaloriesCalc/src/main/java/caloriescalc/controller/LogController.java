@@ -1,6 +1,6 @@
 package caloriescalc.controller;
 
-import caloriescalc.dao.JournalDao;
+import caloriescalc.dao.UserDao;
 import caloriescalc.model.UserData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -48,7 +48,8 @@ public class LogController {
 
     private List<UserData> journal;
 
-    private JournalDao journalDao;
+    private UserDao userDao;
+
 
     public void goBackToCalculator(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxmlfiles/mainpage.fxml"));
@@ -60,13 +61,16 @@ public class LogController {
     }
 
     public void initdata(String username){
-        journalDao= JournalDao.getInstance();
-        this.journal=journalDao.findAll();
+        userDao = UserDao.getInstance();
+        this.journal= userDao.findAll();
         this.username=username;
         Logger.debug((this.journal + " is the loglist."));
         setCells();
     }
 
+    /**
+     * Sets the data to the cells of the journal.
+     */
     public void setCells(){
         nameCol.setCellValueFactory(new PropertyValueFactory<UserData, String>("username"));
         calCol.setCellValueFactory(new PropertyValueFactory<UserData, String>("cal"));

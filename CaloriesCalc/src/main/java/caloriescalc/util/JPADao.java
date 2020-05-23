@@ -6,9 +6,16 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
+/**
+ * Generic JPA DAO class that provides JPA support for the entity class
+ * specified.
+ *
+ * @param <T> the type of the entity class
+ */
 public abstract class JPADao<T> {
 
     protected Class<T> entityClass;
+
     protected EntityManager entityManager;
 
     /**

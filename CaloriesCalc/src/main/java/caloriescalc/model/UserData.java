@@ -12,7 +12,7 @@ import javax.persistence.Id;
 import java.time.LocalDate;
 
 /**
- * Class representing user of {@link Journal}
+ * Class representing the user of the app.
  */
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,45 +25,53 @@ public class UserData {
     @GeneratedValue
     private Long id;
 
+    /**
+     * Date of the usage.
+     */
     private LocalDate date;
 
     /**
-     * Name of the user
+     * Name of the user.
      */
     private String username;
 
     /**
-     * Calorie intake of the user
+     * Calorie intake of the user.
      */
     private double cal;
 
     /**
-     * Carbohydrate intake of the user
+     * Carbohydrate intake of the user.
      */
     private double carb;
 
     /**
-     * Fat intake of the user
+     * Fat intake of the user.
      */
     private double fat;
 
     /**
-     * Protein intake of the user
+     * Protein intake of the user.
      */
     private double prot;
 
     /**
-     * BMI number of the user
+     * BMI number of the user.
      */
     private String bmi;
 
+    /**
+     * A constructor of a UserData object.
+     *
+     * @param username the name of the user
+     */
     public UserData(String username){
         this.date=LocalDate.now();
         this.username=username;
     }
 
     /**
-     * Sets all the double values of the item to zero
+     * Sets all the double values of the item to zero.
      */
     public void zeroValues(){
         this.cal=0;
@@ -73,7 +81,8 @@ public class UserData {
     }
 
     /**
-     * Checks if all of the double values are zero
+     * Checks if all of the double values are zero.
+     *
      * @return the result of the boolean expression
      */
     public boolean isEverythingZero(){
@@ -84,7 +93,8 @@ public class UserData {
     }
 
     /**
-     * Adds a rounded off value to the {@link UserData}'s cal attribute
+     * Adds a rounded off value to the {@link UserData}'s cal attribute.
+     *
      * @param value value to be added
      */
     public void addToCal(double value){
@@ -92,7 +102,8 @@ public class UserData {
     }
 
     /**
-     * Adds a rounded off value to the {@link UserData}'s carb attribute
+     * Adds a rounded off value to the {@link UserData}'s carb attribute.
+     *
      * @param value value to be added
      */
     public void addToCarb(double value){
@@ -100,7 +111,8 @@ public class UserData {
     }
 
     /**
-     * Adds a rounded off value to the {@link UserData}'s fat attribute
+     * Adds a rounded off value to the {@link UserData}'s fat attribute.
+     *
      * @param value value to be added
      */
     public void addToFat(double value){
@@ -108,7 +120,8 @@ public class UserData {
     }
 
     /**
-     * Adds a rounded off value to the {@link UserData}'s protein attribute
+     * Adds a rounded off value to the {@link UserData}'s protein attribute.
+     *
      * @param value value to be added
      */
     public void addToProt(double value){

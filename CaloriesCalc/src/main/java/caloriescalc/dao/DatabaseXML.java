@@ -6,12 +6,12 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 
 /**
- * Class to save and load files from XML using JAXB
+ * Class to save and load files from XML using JAXB.
  */
 public class DatabaseXML {
 
     /**
-     * Deserializes a FoodList object from XML
+     * Deserializes a FoodList object from XML.
      *
      * @return the resulting object
      * @throws Exception if problem occurs during deserialization

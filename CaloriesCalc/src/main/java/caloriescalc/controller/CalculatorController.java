@@ -1,13 +1,11 @@
 package caloriescalc.controller;
 
 import caloriescalc.dao.DatabaseXML;
-import caloriescalc.dao.JournalDao;
+import caloriescalc.dao.UserDao;
 import caloriescalc.model.FoodItem;
 import caloriescalc.model.FoodList;
-import caloriescalc.model.Journal;
 import caloriescalc.model.UserData;
 import caloriescalc.util.CalculationHelper;
-import com.mysql.cj.log.Log;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,13 +22,12 @@ import org.tinylog.Logger;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class CalculatorController {
 
-    private JournalDao journal;
+    private UserDao journal;
 
     @FXML
     private TextField weightField;
@@ -71,7 +68,7 @@ public class CalculatorController {
 
     @FXML
     public void  initialize() throws Exception {
-        journal = JournalDao.getInstance();
+        journal = UserDao.getInstance();
         setImages("/images/male.png", "/images/female.png" );
         loadData();
         List<String> lista=foodList.getData().stream()
@@ -86,7 +83,7 @@ public class CalculatorController {
     }
 
     /**
-     * Sets the images of the male and female value tables
+     * Sets the images of the male and female value tables.
      *
      * @param male male image path
      * @param female female image path
@@ -98,7 +95,7 @@ public class CalculatorController {
     }
 
     /**
-     * Loads the data that contains the food items and the journal
+     * Loads the data that contains the food items and the journal.
      *
      * @throws JAXBException if a problem occurs during the loading
      */
@@ -108,7 +105,7 @@ public class CalculatorController {
     }
 
     /**
-     * Sets text to BMI {@link Label}
+     * Sets text to BMI {@link Label}.
      *
      * @param text the text to be set
      * @param color the color of the text
@@ -146,7 +143,7 @@ public class CalculatorController {
     }
 
     /**
-     * Updates the texts representing the nutrients
+     * Updates the texts representing the nutrients.
      */
     private void updateNutrients(){
         allCaloriesText.setText(Double.toString(userData.getCal()));

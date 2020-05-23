@@ -1,4 +1,4 @@
 /**
- * Contains the main classes
+ * Contains the main classes.
  */
 package caloriescalc.main;

@@ -1,12 +1,12 @@
 package caloriescalc.util;
 
 /**
- * Class to help calculations
+ * Class to help calculations.
  */
 public class CalculationHelper {
 
     /**
-     * Rounds off given parameter
+     * Rounds off given parameter.
      *
      * @param toRound number to round off
      * @return the rounded number
@@ -16,7 +16,7 @@ public class CalculationHelper {
     }
 
     /**
-     * Calculates BMI by the given parametres
+     * Calculates BMI by the given parametres.
      *
      * @param weightKg a person's weight in Kg
      * @param heightCm a person's height in Cm
