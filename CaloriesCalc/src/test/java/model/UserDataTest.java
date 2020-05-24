@@ -22,6 +22,7 @@ public class UserDataTest {
     @AfterEach
     public void tearDown(){
         data1=null;
+        data2=null;
     }
 
     @Test
